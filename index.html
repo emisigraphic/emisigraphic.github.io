@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="it" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio di Noemi Alderisi</title>
+    <meta name="description" content="Portfolio personale di Noemi Alderisi: progetti, competenze e contatti." />
+    <meta property="og:title" content="Portfolio di Noemi Alderisi" />
+    <meta property="og:description" content="Portfolio personale di Noemi Alderisi: progetti, competenze e contatti." />
+    <meta property="og:type" content="website" />
+
+    <!-- Font pennellata per lo splash "hello" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Configurazione Tailwind: palette brand
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              caramel: '#ab783e',
+              gold: '#d9a062',
+              cocoa: '#6e3010',
+              ink: '#221505',
+              sand: '#dfcda2',
+              beige: '#d1bc92',
+              white: '#ffffff',
+            },
+            boxShadow: {
+              soft: '0 10px 30px -10px rgba(0,0,0,0.2)'
+            },
+          },
+        },
+        darkMode: 'class',
+      };
+    </script>
+
+    <style>
+      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      section:target { scroll-margin-top: 7rem; }
+      .font-pacifico { font-family: 'Pacifico', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; }
+      /* Splash fade */
+      #splash { transition: opacity .7s ease, visibility .7s ease; }
+      #splash.hidden { opacity: 0; visibility: hidden; }
+    </style>
+    <script>
+      // Tema dark/light da preferenze
+      (function() {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if ((stored === 'dark') || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-white text-ink dark:bg-ink dark:text-beige">
+    <!-- BACKGROUND SFUMATURE MORBIDE -->
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-gold/25 blur-3xl"></div>
+      <div class="absolute bottom-[-10rem] right-[-10rem] w-[40rem] h-[40rem] rounded-full bg-caramel/20 blur-3xl"></div>
+    </div>
+
+    <!-- SPLASH "hello" pennellata -->
+    <div id="splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-sand via-beige to-gold">
+      <div class="text-center px-6">
+        <h1 id="splashHello" class="font-pacifico text-6xl md:text-7xl text-ink drop-shadow-sm"></h1>
+        <div id="brushLine" class="mx-auto mt-4 h-2 w-0 bg-caramel rounded-full"></div>
+        <button id="skipSplash" class="mt-10 inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-ink/20 text-ink/80 hover:text-ink hover:bg-white/40 backdrop-blur-sm">Entra</button>
+      </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-ink/70 border-b border-beige/60 dark:border-cocoa/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+        <a href="#home" class="font-semibold text-lg tracking-tight">Noemi Alderisi</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a class="hover:text-caramel" href="#progetti">Progetti</a>
+          <a class="hover:text-caramel" href="#competenze">Competenze</a>
+          <a class="hover:text-caramel" href="#esperienza">Esperienza</a>
+          <a class="hover:text-caramel" href="#contatti">Contatti</a>
+          <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10" href="#cv" aria-label="Scarica CV">CV ↗</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" class="p-2 rounded-xl border border-beige/70 hover:bg-gold/10" aria-label="Cambia tema">🌙</button>
+          <button id="menuBtn" class="md:hidden p-2 rounded-xl border border-beige/70" aria-label="Apri menu">☰</button>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden border-t border-beige/70">
+        <nav class="max-w-6xl mx-auto px-4 py-3 grid gap-3 text-sm">
+          <a class="hover:text-caramel" href="#progetti">Progetti</a>
+          <a class="hover:text-caramel" href="#competenze">Competenze</a>
+          <a class="hover:text-caramel" href="#esperienza">Esperienza</a>
+          <a class="hover:text-caramel" href="#contatti">Contatti</a>
+          <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10 w-max" href="#cv">Scarica CV</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="pt-20 md:pt-28">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="text-sm uppercase tracking-widest text-caramel font-medium">Portfolio</p>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mt-3">
+            Ciao, sono <span class="text-caramel">Noemi</span>.<br />
+            Costruisco esperienze web pulite e performanti.
+          </h1>
+          <p class="mt-5 text-ink/70 dark:text-beige/80 max-w-prose">
+            Breve bio di 2–3 righe: specializzazione, tecnologie preferite e valore che porti.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#contatti" class="px-5 py-2.5 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition">Contattami</a>
+            <a href="#progetti" class="px-5 py-2.5 rounded-xl border border-beige/70 hover:bg-gold/10">Guarda i progetti</a>
+          </div>
+          <div class="mt-6 flex items-center gap-3">
+            <!-- LinkedIn icon -->
+            <a href="https://www.linkedin.com/in/noemi-alderisi-7319a0313/" target="_blank" rel="noopener" aria-label="LinkedIn di Noemi Alderisi" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V9h3v10zM6.5 7.8c-.96 0-1.7-.78-1.7-1.8s.74-1.8 1.7-1.8c.96 0 1.7.78 1.7 1.8s-.74 1.8-1.7 1.8zM20 19h-3v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95V19h-3V9h2.88v1.36h.04c.4-.76 1.38-1.56 2.85-1.56 3.05 0 3.62 2.01 3.62 4.62V19z"/></svg>
+            </a>
+            <!-- Email icon -->
+            <a href="mailto:noemialderisi@gmail.com" aria-label="Invia un'email a noemialderisi@gmail.com" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065ZM0 8l12 7 12-7v12H0V8Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-square rounded-3xl bg-gradient-to-br from-sand to-gold dark:from-cocoa/50 dark:to-ink/50 p-1">
+            <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?q=80&w=1000&auto=format&fit=crop" alt="Ritratto o immagine tematica" class="w-full h-full object-cover rounded-2xl" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGETTI -->
+    <section id="progetti" class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-2xl md:text-3xl font-bold">Progetti in evidenza</h2>
+          <a href="#" class="text-sm underline decoration-dotted">Tutti i progetti</a>
+        </div>
+        <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card progetto placeholder -->
+          <article class="rounded-2xl border border-beige/70 overflow-hidden hover:shadow-soft transition bg-white/80 dark:bg-ink/30">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop" alt="Anteprima progetto 1" class="w-full h-44 object-cover" />
+            <div class="p-5">
+              <h3 class="font-semibold text-lg">Progetto Uno</h3>
+              <p class="mt-2 text-sm text-ink/70 dark:text-beige/80">Breve descrizione del progetto: problema, soluzione e impatto.</p>
+              <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">React</span>
+                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">Tailwind</span>
+              </div>
+              <div class="mt-4 flex items-center gap-4 text-sm">
+                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Demo</a>
+                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Codice</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-2xl border border-beige/70 overflow-hidden hover:shadow-soft transition bg-white/80 dark:bg-ink/30">
+            <img src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=1200&auto=format&fit=crop" alt="Anteprima progetto 2" class="w-full h-44 object-cover" />
+            <div class="p-5">
+              <h3 class="font-semibold text-lg">Progetto Due</h3>
+              <p class="mt-2 text-sm text-ink/70 dark:text-beige/80">Breve descrizione: tecnologie, responsabilità, risultati.</p>
+              <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">Next.js</span>
+                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">TypeScript</span>
+              </div>
+              <div class="mt-4 flex items-center gap-4 text-sm">
+                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Demo</a>
+                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Codice</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-2xl border border-beige/70 overflow-hidden hover:shadow-soft transition bg-white/80 dark:bg-ink/30">
+            <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?q=80&w=1200&auto=format&fit=crop" alt="Anteprima progetto 3" class="w-full h-44 object-cover" />
+            <div class="p-5">
+              <h3 class="font-semibold text-lg">Progetto Tre</h3>
+              <p class="mt-2 text-sm text-ink/70 dark:text-beige/80">Breve descrizione: obiettivi, metriche, link.</p>
+              <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">Node</span>
+                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">PostgreSQL</span>
+              </div>
+              <div class="mt-4 flex items-center gap-4 text-sm">
+                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Demo</a>
+                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Codice</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENZE -->
+    <section id="competenze" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Competenze</h2>
+        <p class="mt-2 text-ink/70 dark:text-beige/80">Tecnologie e strumenti che uso con più frequenza.</p>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">JavaScript / TypeScript</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">React / Next.js</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">HTML / CSS / Tailwind</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Node / Express</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">SQL / PostgreSQL</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Git / GitHub</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ESPERIENZA -->
+    <section id="esperienza" class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Esperienza</h2>
+        <ol class="relative mt-8">
+          <li class="mb-10 ms-6">
+            <span class="absolute -start-3 flex items-center justify-center w-6 h-6 bg-caramel rounded-full ring-8 ring-white dark:ring-ink"></span>
+            <div class="p-5 rounded-2xl border border-beige/70">
+              <h3 class="font-semibold">Ruolo · Azienda</h3>
+              <p class="text-sm text-ink/60 dark:text-beige/80">Gen 2023 — Presente · Città</p>
+              <p class="mt-2 text-sm">Responsabilità principali e risultati chiave (bullet brevi).</p>
+            </div>
+          </li>
+          <li class="mb-10 ms-6">
+            <span class="absolute -start-3 flex items-center justify-center w-6 h-6 bg-caramel rounded-full ring-8 ring-white dark:ring-ink"></span>
+            <div class="p-5 rounded-2xl border border-beige/70">
+              <h3 class="font-semibold">Ruolo · Azienda</h3>
+              <p class="text-sm text-ink/60 dark:text-beige/80">Mag 2021 — Dic 2022 · Remoto</p>
+              <p class="mt-2 text-sm">Sintesi dell'impatto, metriche, strumenti usati.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CONTATTI (senza form, solo icone) -->
+    <section id="contatti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">Contattami</h2>
+          <p class="mt-2 text-ink/70 dark:text-beige/80">Preferisci scrivermi direttamente?</p>
+          <div class="mt-6 flex items-center gap-4">
+            <a href="mailto:noemialderisi@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition" aria-label="Invia un'email a Noemi">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065ZM0 8l12 7 12-7v12H0V8Z"/></svg>
+              <span>Email</span>
+            </a>
+            <a href="https://www.linkedin.com/in/noemi-alderisi-7319a0313/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-beige/70 hover:bg-gold/10" aria-label="LinkedIn di Noemi Alderisi">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V9h3v10zM6.5 7.8c-.96 0-1.7-.78-1.7-1.8s.74-1.8 1.7-1.8c.96 0 1.7.78 1.7 1.8s-.74 1.8-1.7 1.8zM20 19h-3v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95V19h-3V9h2.88v1.36h.04c.4-.76 1.38-1.56 2.85-1.56 3.05 0 3.62 2.01 3.62 4.62V19z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+        <div class="rounded-3xl p-1 bg-gradient-to-br from-sand to-gold">
+          <div class="rounded-2xl p-6 bg-white/70 dark:bg-ink/60">
+            <p class="text-sm text-ink/70 dark:text-beige/80">Oppure copia l'indirizzo email:</p>
+            <div class="mt-2 flex items-center gap-3">
+              <code class="px-3 py-1.5 rounded-lg bg-sand/60 border border-beige/70 select-all">noemialderisi@gmail.com</code>
+              <button id="copyMail" class="px-3 py-1.5 rounded-lg border border-beige/70 hover:bg-gold/10 text-sm">Copia</button>
+            </div>
+            <p id="copyMsg" class="mt-2 text-xs text-ink/60 dark:text-beige/70 hidden">Copiato!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 text-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>© <span id="year"></span> Noemi Alderisi. Tutti i diritti riservati.</p>
+        <div class="flex items-center gap-4">
+          <a class="underline decoration-dotted" href="#">Privacy</a>
+          <a class="underline decoration-dotted" href="#">Impressum</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Anno dinamico
+      (function(){
+        const y = document.getElementById('year');
+        if (y) y.textContent = new Date().getFullYear();
+      })();
+
+      // Toggle tema
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        const root = document.documentElement;
+        const isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      // Mobile menu
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Splash typing + pennellata
+      const helloText = 'hello';
+      const el = document.getElementById('splashHello');
+      const line = document.getElementById('brushLine');
+      const splash = document.getElementById('splash');
+      const skip = document.getElementById('skipSplash');
+
+      function typeHello(i = 0) {
+        if (i <= helloText.length) {
+          el.textContent = helloText.slice(0, i);
+          setTimeout(() => typeHello(i + 1), 140);
+        } else {
+          // Animazione "pennello": linea che cresce fino alla larghezza del testo
+          const w = Math.min(el.getBoundingClientRect().width, 600);
+          line.style.transition = 'width .6s ease';
+          line.style.width = w + 'px';
+          // Chiudi splash dopo poco
+          setTimeout(hideSplash, 900);
+        }
+      }
+
+      function hideSplash(){
+        splash.classList.add('hidden');
+      }
+
+      document.addEventListener('DOMContentLoaded', typeHello);
+      skip.addEventListener('click', hideSplash);
+      splash.addEventListener('click', hideSplash);
+
+      // Copia email
+      const copyBtn = document.getElementById('copyMail');
+      const copyMsg = document.getElementById('copyMsg');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText('noemialderisi@gmail.com');
+            copyMsg.classList.remove('hidden');
+            setTimeout(()=>copyMsg.classList.add('hidden'), 1200);
+          } catch(e) {}
+        });
+      }
+    </script>
+  </body>
+</html>
+
