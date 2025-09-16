@@ -25,6 +25,12 @@
         font-style: normal;
         font-display: swap;
       }
+          /* Splash SVG draw "Hello" */
+      #helloSvg{width:min(90vw,900px);height:auto;}
+      #helloStroke{fill:transparent;stroke:url(#helloGrad);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:1200;animation:helloDraw 2.6s ease-out forwards}
+      #helloFill{fill:#221505;opacity:0;animation:helloFill .6s ease-out 2.2s forwards}
+      @keyframes helloDraw{to{stroke-dashoffset:0}}
+      @keyframes helloFill{to{opacity:1}}
     </style>
 
     <!-- Tailwind via CDN -->
@@ -99,13 +105,18 @@
       <div class="absolute bottom-[-10rem] right-[-10rem] w-[40rem] h-[40rem] rounded-full bg-caramel/20 blur-3xl"></div>
     </div>
 
-    <!-- SPLASH "hello" pennarello -->
+    <!-- SPLASH: SVG Hello disegnato -->
     <div id="splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-sand via-beige to-gold">
-      <div class="text-center px-6">
-        <h1 id="splashHello" class="title-script drop-shadow-sm" aria-label="Hello"></h1>
-        <div id="brushLine" class="mx-auto mt-4 h-2 w-0 bg-caramel rounded-full"></div>
-        <button id="skipSplash" class="mt-10 inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-ink/20 text-ink/80 hover:text-ink hover:bg-white/40 backdrop-blur-sm"><span data-i18n="splash_enter">Entra</span></button>
-      </div>
+      <svg id="helloSvg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="helloGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ab783e"/>
+            <stop offset="100%" stop-color="#6e3010"/>
+          </linearGradient>
+        </defs>
+        <text id="helloStroke" x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Parfumerie Script Pro', Pacifico, cursive" font-size="220">Hello</text>
+        <text id="helloFill"   x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Parfumerie Script Pro', Pacifico, cursive" font-size="220">Hello</text>
+      </svg>
     </div>
 
     <!-- NAVBAR -->
@@ -298,10 +309,7 @@
     <footer class="py-10">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 text-sm flex flex-col sm:flex-row items-center justify-between gap-4">
         <p>© <span id="year"></span> Noemi Alderisi. <span data-i18n="footer_rights">Tutti i diritti riservati.</span></p>
-        <div class="flex items-center gap-4">
-          <a class="underline decoration-dotted" href="#">Privacy</a>
-          <a class="underline decoration-dotted" href="#">Impressum</a>
-        </div>
+        
       </div>
     </footer>
 
@@ -326,20 +334,18 @@
       menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
       // Splash typing + pennarello
-      const helloText = 'Hello';
-      const el = document.getElementById('splashHello');
-      const line = document.getElementById('brushLine');
+      // ===== SPLASH: auto-hide dopo animazione =====
       const splash = document.getElementById('splash');
-      const skip = document.getElementById('skipSplash');
-
-      function typeHello(i = 0) {
-        if (!el) return;
-        if (i <= helloText.length) { el.textContent = helloText.slice(0, i); setTimeout(() => typeHello(i + 1), 110); }
-        else { const w = Math.min(el.getBoundingClientRect().width, 620); line.style.transition = 'width .6s ease'; line.style.width = w + 'px'; setTimeout(hideSplash, 900); }
-      }
       function hideSplash(){ splash.classList.add('hidden'); }
-      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => setTimeout(() => typeHello(1), 80)); } else { window.addEventListener('load', () => setTimeout(() => typeHello(1), 80)); }
-      skip.addEventListener('click', hideSplash); splash.addEventListener('click', hideSplash);
+      function startSplash(){
+        const total = 3200; // ms: abbastanza per notare l'animazione
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(()=> setTimeout(hideSplash, total));
+        } else {
+          setTimeout(hideSplash, total);
+        }
+      }
+      startSplash();
 
       // Copy email
       const copyBtn = document.getElementById('copyMail'); const copyMsg = document.getElementById('copyMsg');
