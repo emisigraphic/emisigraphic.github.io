@@ -60,7 +60,13 @@
       .title-script { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 145pt; line-height: .9; }
       @media (max-width: 768px){ .title-script { font-size: 80pt; } }
       .kicker { font-family: 'Public Sans', system-ui, sans-serif; font-weight: 700; font-size: 20pt; }
-      .bodycopy { font-family: 'Public Sans', system-ui, sans-serif; font-weight: 400; font-size: 20pt; }
+      $1
+
+      /* Script titles for sections */
+      .script-title { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 44pt; line-height: 1; }
+      @media (max-width: 768px){ .script-title { font-size: 30pt; } }
+      .script-portfolio { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 54pt; line-height: 1; }
+      @media (max-width: 768px){ .script-portfolio { font-size: 36pt; } }
 
       /* Splash visibility & styling */
       #splash { transition: opacity .7s ease, visibility .7s ease; }
@@ -95,7 +101,7 @@
     <!-- SPLASH "hello" pennarello -->
     <div id="splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-sand via-beige to-gold">
       <div class="text-center px-6">
-        <h1 id="splashHello" class="title-script drop-shadow-sm" aria-label="hello"></h1>
+        <h1 $1Hello$2></h1>
         <div id="brushLine" class="mx-auto mt-4 h-2 w-0 bg-caramel rounded-full"></div>
         <button id="skipSplash" class="mt-10 inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-ink/20 text-ink/80 hover:text-ink hover:bg-white/40 backdrop-blur-sm"><span data-i18n="splash_enter">Entra</span></button>
       </div>
@@ -108,7 +114,15 @@
         <nav class="hidden md:flex items-center gap-6 text-sm">
           <a class="hover:text-caramel" href="#progetti" data-i18n="nav_projects">Progetti</a>
           <a class="hover:text-caramel" href="#strumenti" data-i18n="nav_tools">Strumenti</a>
-          <a class="hover:text-caramel" href="#esperienza" data-i18n="nav_experience">Esperienza</a>
+          <a class="hover:text-caramel" href="#esperienza" $1
+          <div class="relative">
+            <button id="moreBtn" class="hover:text-caramel">Più info su di me ▾</button>
+            <div id="moreMenu" class="hidden absolute right-0 mt-2 w-64 rounded-xl border border-beige/70 bg-white dark:bg-ink shadow-soft overflow-hidden">
+              <button class="block w-full text-left px-4 py-2 hover:bg-gold/10" data-open-modal="formazione">Formazione</button>
+              <button class="block w-full text-left px-4 py-2 hover:bg-gold/10" data-open-modal="workshop">Workshop &amp; Certificazioni</button>
+              <button class="block w-full text-left px-4 py-2 hover:bg-gold/10" data-open-modal="lingue">Lingue</button>
+            </div>
+          </div>
           <a class="hover:text-caramel" href="#contatti" data-i18n="nav_contact">Contatti</a>
           <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10" href="#cv" aria-label="Scarica CV"><span data-i18n="nav_cv">CV</span> ↗</a>
         </nav>
@@ -129,7 +143,10 @@
         <nav class="max-w-6xl mx-auto px-4 py-3 grid gap-3 text-sm">
           <a class="hover:text-caramel" href="#progetti" data-i18n="nav_projects">Progetti</a>
           <a class="hover:text-caramel" href="#strumenti" data-i18n="nav_tools">Strumenti</a>
-          <a class="hover:text-caramel" href="#esperienza" data-i18n="nav_experience">Esperienza</a>
+          <a class="hover:text-caramel" $1
+          <button class="text-left hover:text-caramel" data-open-modal="formazione">Formazione</button>
+          <button class="text-left hover:text-caramel" data-open-modal="workshop">Workshop &amp; Certificazioni</button>
+          <button class="text-left hover:text-caramel" data-open-modal="lingue">Lingue</button>
           <a class="hover:text-caramel" href="#contatti" data-i18n="nav_contact">Contatti</a>
           <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10 w-max" href="#cv"><span data-i18n="nav_cv">CV</span></a>
         </nav>
@@ -140,12 +157,12 @@
     <section id="home" class="pt-16 md:pt-20">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <p class="kicker uppercase tracking-widest text-caramel" data-i18n="portfolio">Portfolio</p>
+          <p class="script-portfolio text-caramel" data-i18n="portfolio">Portfolio</p>
           <h1 class="kicker mt-3"><span data-i18n="hero_intro">Ciao, sono</span> <span class="text-caramel">Noemi</span>.</h1>
-          <p class="bodycopy mt-5" data-i18n="hero_desc_it">ciao! sono Noemi. ho una passione per il caffè, punti vettoriali e pixel perfetti. creo marchi e design che ti fanno dire "wow". ricordando sempre che il design è arte, ma con un obiettivo!</p>
+          <p class="bodycopy mt-5" data-i18n="hero_desc_it">Ho una passione per il caffè, punti vettoriali e pixel perfetti. Creo marchi e design che ti fanno dire "wow". Ricordando sempre che il design è arte, ma con un obiettivo!</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <a href="#contatti" class="px-5 py-2.5 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition"><span data-i18n="cta_contact">Contattami</span></a>
-            <a href="#progetti" class="px-5 py-2.5 rounded-xl border border-beige/70 hover:bg-gold/10"><span data-i18n="cta_projects">Guarda i progetti</span></a>
+            
           </div>
           <div class="mt-6 flex items-center gap-3">
             <a id="lnkLinkedinHero" href="https://www.linkedin.com/in/noemi-alderisi-7319a0313/" target="_blank" rel="noopener" aria-label="LinkedIn di Noemi Alderisi" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
@@ -179,7 +196,7 @@
     <section id="progetti" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="flex items-end justify-between gap-4">
-          <h2 class="kicker" data-i18n="projects_title">Progetti in evidenza</h2>
+          <h2 class="script-title" data-i18n="projects_title">Progetti in evidenza</h2>
           <a href="#" class="text-sm underline decoration-dotted" data-i18n="projects_all">Tutti i progetti</a>
         </div>
         <p class="bodycopy mt-4 opacity-70" data-i18n="projects_soon">Presto in arrivo: aggiungeremo i tuoi progetti migliori.</p>
@@ -189,7 +206,7 @@
     <!-- STRUMENTI -->
     <section id="strumenti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 class="kicker" data-i18n="tools_title">Strumenti</h2>
+        <h2 class="script-title" data-i18n="tools_title">Strumenti</h2>
         <p class="bodycopy mt-2 opacity-80" data-i18n="tools_desc">I software che uso ogni giorno.</p>
         <ul class="mt-6 flex flex-wrap gap-2 text-[16pt]">
           <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Figma</li>
@@ -207,7 +224,7 @@
     <!-- ESPERIENZA + FORMAZIONE -->
     <section id="esperienza" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 class="kicker" data-i18n="experience_title">Esperienza</h2>
+        <h2 class="script-title" data-i18n="experience_title">Esperienza</h2>
         <ol class="relative mt-8">
           <li class="mb-10 ms-6">
             <span class="absolute -start-3 flex items-center justify-center w-6 h-6 bg-caramel rounded-full ring-8 ring-white dark:ring-ink"></span>
@@ -227,30 +244,43 @@
           </li>
         </ol>
 
-        <div class="grid md:grid-cols-2 gap-6 mt-10">
-          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
-            <h3 class="font-bold text-[20pt]">Formazione</h3>
-            <ul class="mt-3 space-y-2 text-[16pt]">
+        
+
+        
+      </div>
+    </section>
+
+    <!-- MODALE: Più info su di me -->
+    <div id="moreModal" class="fixed inset-0 z-[120] hidden">
+      <div id="moreOverlay" class="absolute inset-0 bg-black/50"></div>
+      <div class="relative mx-auto my-10 max-w-3xl w-[92%] rounded-2xl border border-beige/70 bg-white dark:bg-ink p-6">
+        <div class="flex items-center justify-between">
+          <h3 id="moreTitle" class="script-title text-caramel">Più info su di me</h3>
+          <button id="moreClose" class="px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-gold/10">✕</button>
+        </div>
+        <div id="moreContent" class="mt-4 space-y-4 text-[16pt]">
+          <div data-section="formazione">
+            <h4 class="font-bold text-[20pt] mb-2">Formazione</h4>
+            <ul class="space-y-2">
               <li><strong>Accademia di Belle Arti, Catania</strong> — Visual Communication Design (2021–Presente)</li>
               <li><strong>Liceo Artistico “M.M. Lazzaro”, Catania</strong> — Grafica Pubblicitaria (2015–2020)</li>
             </ul>
           </div>
-          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
-            <h3 class="font-bold text-[20pt]">Workshop & Certificazioni</h3>
-            <ul class="mt-3 space-y-2 text-[16pt]">
+          <div data-section="workshop" class="hidden">
+            <h4 class="font-bold text-[20pt] mb-2">Workshop &amp; Certificazioni</h4>
+            <ul class="space-y-2">
               <li>Workshop con <strong>Aeroporto di Catania</strong>: pannelli di awareness su oggetti “pericolosi” ai raggi X (illusioni visive).</li>
               <li>Workshop con <strong>Comune di Catania</strong> e scuole: tutoraggio annuale, mostra itinerante finale (3 giorni).</li>
               <li>Corso Sicurezza sul Lavoro — completato 2024.</li>
             </ul>
           </div>
-        </div>
-
-        <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30 mt-6">
-          <h3 class="font-bold text-[20pt]">Lingue</h3>
-          <p class="text-[16pt]">Italiano (madrelingua) · Inglese (intermedio)</p>
+          <div data-section="lingue" class="hidden">
+            <h4 class="font-bold text-[20pt] mb-2">Lingue</h4>
+            <p>Italiano (madrelingua) · Inglese (intermedio)</p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- CONTATTI -->
     <section id="contatti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
@@ -310,7 +340,6 @@
         const isDark = root.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         renderThemeIcon();
-      });
       renderThemeIcon();
 
             });
@@ -320,7 +349,7 @@
       menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
       // Splash typing + pennarello
-      const helloText = 'hello';
+      const helloText = 'Hello';
       const el = document.getElementById('splashHello');
       const line = document.getElementById('brushLine');
       const splash = document.getElementById('splash');
@@ -334,6 +363,40 @@
       function hideSplash(){ splash.classList.add('hidden'); }
       if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => setTimeout(() => typeHello(1), 80)); } else { window.addEventListener('load', () => setTimeout(() => typeHello(1), 80)); }
       skip.addEventListener('click', hideSplash); splash.addEventListener('click', hideSplash);
+
+      // Dropdown 'Più info su di me' + Modale
+      const moreBtn = document.getElementById('moreBtn');
+      const moreMenu = document.getElementById('moreMenu');
+      const moreModal = document.getElementById('moreModal');
+      const moreOverlay = document.getElementById('moreOverlay');
+      const moreClose = document.getElementById('moreClose');
+      const moreSections = Array.from(document.querySelectorAll('#moreContent [data-section]'));
+
+      function openMore(which){
+        moreSections.forEach(sec => sec.classList.toggle('hidden', sec.getAttribute('data-section') !== which));
+        moreModal.classList.remove('hidden');
+      }
+      function closeMore(){ moreModal.classList.add('hidden'); }
+      function hideMoreMenu(){ moreMenu.classList.add('hidden'); }
+
+      if (moreBtn){
+        moreBtn.addEventListener('click', () => {
+          moreMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', (e)=>{
+          if (!moreMenu.contains(e.target) && e.target !== moreBtn) hideMoreMenu();
+        });
+      }
+      document.querySelectorAll('[data-open-modal]').forEach(btn => btn.addEventListener('click', (e)=>{
+        const which = btn.getAttribute('data-open-modal');
+        openMore(which);
+        hideMoreMenu();
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu) mobileMenu.classList.add('hidden');
+      }));
+      if (moreOverlay) moreOverlay.addEventListener('click', closeMore);
+      if (moreClose) moreClose.addEventListener('click', closeMore);
+      document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeMore(); });
 
       // Copy email
       const copyBtn = document.getElementById('copyMail'); const copyMsg = document.getElementById('copyMsg');
