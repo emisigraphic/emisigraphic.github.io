@@ -27,8 +27,10 @@
       }
           /* Splash SVG draw "Hello" */
       #helloSvg{width:min(90vw,900px);height:auto;}
-      #helloStroke{fill:transparent;stroke:url(#helloGrad);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:1200;animation:helloDraw 2.6s ease-out forwards}
-      #helloFill{fill:#221505;opacity:0;animation:helloFill .6s ease-out 2.2s forwards}
+      #helloStroke{fill:#ab783e;stroke:#ab783e;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2400;stroke-dashoffset:2400;animation:helloDraw var(--draw-duration,2.8s) ease-out forwards}
+      #helloFill{fill:#ab783e;opacity:0;animation:helloFill .6s ease-out calc(var(--draw-duration,2.8s) - .2s) forwards}
+      #marker{position:absolute;width:56px;height:56px;transition:left .3s ease, top .3s ease, transform .3s ease;transform-origin:70% 80%;}
+      #palette .blob{box-shadow:0 8px 18px -8px rgba(0,0,0,.3)}
       @keyframes helloDraw{to{stroke-dashoffset:0}}
       @keyframes helloFill{to{opacity:1}}
     </style>
@@ -105,15 +107,21 @@
       <div class="absolute bottom-[-10rem] right-[-10rem] w-[40rem] h-[40rem] rounded-full bg-caramel/20 blur-3xl"></div>
     </div>
 
-    <!-- SPLASH: SVG Hello disegnato -->
+    <!-- SPLASH: pennello che intinge nella tavolozza e scrive "Hello" -->
     <div id="splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-sand via-beige to-gold">
+      <div class="absolute left-8 bottom-8 flex items-center" id="palette">
+        <span class="blob w-10 h-10 rounded-full bg-caramel caramel"></span>
+        <span class="blob w-10 h-10 rounded-full bg-gold -ml-3"></span>
+        <span class="blob w-10 h-10 rounded-full bg-sand -ml-3"></span>
+      </div>
+      <div id="marker" style="left:48px; top: calc(100% - 120px);">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+          <rect x="6" y="22" width="40" height="12" rx="6" fill="#221505"/>
+          <rect x="30" y="22" width="16" height="12" rx="6" fill="#ab783e"/>
+          <path d="M6 22 L0 28 L6 34 Z" fill="#6e3010"/>
+        </svg>
+      </div>
       <svg id="helloSvg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="helloGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ab783e"/>
-            <stop offset="100%" stop-color="#6e3010"/>
-          </linearGradient>
-        </defs>
         <text id="helloStroke" x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Parfumerie Script Pro', Pacifico, cursive" font-size="220">Hello</text>
         <text id="helloFill"   x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Parfumerie Script Pro', Pacifico, cursive" font-size="220">Hello</text>
       </svg>
@@ -334,18 +342,53 @@
       menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
       // Splash typing + pennarello
-      // ===== SPLASH: auto-hide dopo animazione =====
+      // ===== SPLASH: pennello + disegno "Hello" sincronizzati =====
       const splash = document.getElementById('splash');
-      function hideSplash(){ splash.classList.add('hidden'); }
-      function startSplash(){
-        const total = 3200; // ms: abbastanza per notare l'animazione
-        if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(()=> setTimeout(hideSplash, total));
-        } else {
-          setTimeout(hideSplash, total);
+      const helloSvg = document.getElementById('helloSvg');
+      const helloStroke = document.getElementById('helloStroke');
+      const marker = document.getElementById('marker');
+      const palDot = document.querySelector('#palette .caramel') || document.querySelector('#palette .blob');
+
+      const DRAW_MS = 2800; // durata dell'animazione di scrittura
+      function setDrawDuration(ms){ if (helloSvg) helloSvg.style.setProperty('--draw-duration', ms+'ms'); }
+      function moveMarker(x,y,rot=0){ marker.style.left = x+'px'; marker.style.top = y+'px'; marker.style.transform = `rotate(${rot}deg)`; }
+
+      function animateMarkerAlongText(){
+        const stageRect = splash.getBoundingClientRect();
+        const r = helloStroke.getBoundingClientRect();
+        const startX = r.left - stageRect.left - 6;
+        const endX = r.right - stageRect.left - 10;
+        const y = r.top - stageRect.top + r.height*0.65;
+        const t0 = performance.now();
+        function step(now){
+          const t = Math.min(1, (now - t0)/DRAW_MS);
+          const x = startX + (endX - startX)*t;
+          moveMarker(x, y, -15);
+          if (t < 1) requestAnimationFrame(step); else setTimeout(()=> splash.classList.add('hidden'), 500);
         }
+        requestAnimationFrame(step);
       }
-      startSplash();
+
+      function runSplash(){
+        setDrawDuration(DRAW_MS);
+        const stageRect = splash.getBoundingClientRect();
+        const pr = palDot.getBoundingClientRect();
+        // Posiziona vicino alla tavolozza
+        moveMarker(pr.left - stageRect.left + pr.width*0.1, pr.top - stageRect.top - 8, 0);
+        // Intinge
+        setTimeout(()=> moveMarker(pr.left - stageRect.left + pr.width*0.05, pr.top - stageRect.top + pr.height*0.2, -35), 220);
+        // Va all'inizio della parola e parte l'animazione
+        setTimeout(()=>{
+          const r = helloStroke.getBoundingClientRect();
+          const x0 = r.left - stageRect.left - 8;
+          const y0 = r.top - stageRect.top + r.height*0.65;
+          moveMarker(x0, y0, -15);
+          animateMarkerAlongText();
+        }, 900);
+      }
+
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(runSplash); }
+      else { window.addEventListener('load', runSplash); }
 
       // Copy email
       const copyBtn = document.getElementById('copyMail'); const copyMsg = document.getElementById('copyMsg');
