@@ -4,23 +4,39 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Portfolio di Noemi Alderisi</title>
-    <meta name="description" content="Portfolio personale di Noemi Alderisi: progetti, competenze e contatti." />
+    <meta name="description" content="Portfolio personale di Noemi Alderisi: brand, illustrazione e design mirato al risultato." />
     <meta property="og:title" content="Portfolio di Noemi Alderisi" />
-    <meta property="og:description" content="Portfolio personale di Noemi Alderisi: progetti, competenze e contatti." />
+    <meta property="og:description" content="Portfolio personale di Noemi Alderisi: brand, illustrazione e design mirato al risultato." />
     <meta property="og:type" content="website" />
 
-    <!-- Font pennellata per lo splash "hello" -->
+    <!-- Font -->
+    <!-- Preload font script locale (TTF) -->
+    <link rel="preload" href="/fonts/ParfumerieScriptPro.ttf" as="font" type="font/ttf" crossorigin>
+    <!-- Public Sans (Google Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Parfumerie Script Pro (richiede file licenziato). Placeholder + fallback -->
+    <style>
+      @font-face {
+        font-family: 'Parfumerie Script Pro';
+        src: url('/fonts/ParfumerieScriptPro.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
 
     <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Configurazione Tailwind: palette brand
       tailwind.config = {
         theme: {
           extend: {
+            fontFamily: {
+              sans: ['Public Sans', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+              script: ['Parfumerie Script Pro', 'Pacifico', 'cursive']
+            },
             colors: {
               caramel: '#ab783e',
               gold: '#d9a062',
@@ -30,9 +46,7 @@
               beige: '#d1bc92',
               white: '#ffffff',
             },
-            boxShadow: {
-              soft: '0 10px 30px -10px rgba(0,0,0,0.2)'
-            },
+            boxShadow: { soft: '0 10px 30px -10px rgba(0,0,0,0.2)' },
           },
         },
         darkMode: 'class',
@@ -42,15 +56,26 @@
     <style>
       html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
       section:target { scroll-margin-top: 7rem; }
-      .font-pacifico { font-family: 'Pacifico', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; }
-      /* Splash fade */
+      /* Tipografia richiesta */
+      .title-script { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 145pt; line-height: .9; }
+      @media (max-width: 768px){ .title-script { font-size: 80pt; } }
+      .kicker { font-family: 'Public Sans', system-ui, sans-serif; font-weight: 700; font-size: 20pt; }
+      .bodycopy { font-family: 'Public Sans', system-ui, sans-serif; font-weight: 400; font-size: 20pt; }
+
+      /* Splash visibility & styling */
       #splash { transition: opacity .7s ease, visibility .7s ease; }
       #splash.hidden { opacity: 0; visibility: hidden; }
-      /* Migliora la visibilità del "hello" */
-      #splashHello { color: #221505; -webkit-text-stroke: 0.5px rgba(255,255,255,0.45); text-shadow: 0 2px 10px rgba(0,0,0,.08), 0 0 1px rgba(255,255,255,.35); }
+      #splashHello { color: #221505; -webkit-text-stroke: 1px rgba(255,255,255,0.45); text-shadow: 0 2px 10px rgba(0,0,0,.08), 0 0 1px rgba(255,255,255,.35); }
+
+      /* Flip avatar/photo */
+      .flip-wrap { perspective: 1200px; }
+      .flip { transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+      .flip.is-flipped { transform: rotateY(180deg); }
+      .flip-face { backface-visibility: hidden; }
+      .flip-back { transform: rotateY(180deg); }
     </style>
+
     <script>
-      // Tema dark/light da preferenze
       (function() {
         const stored = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -60,17 +85,17 @@
       })();
     </script>
   </head>
-  <body class="bg-white text-ink dark:bg-ink dark:text-beige">
-    <!-- BACKGROUND SFUMATURE MORBIDE -->
+  <body class="bg-white text-ink dark:bg-ink dark:text-beige font-sans">
+    <!-- SFONDO SFUMATURE -->
     <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-gold/25 blur-3xl"></div>
       <div class="absolute bottom-[-10rem] right-[-10rem] w-[40rem] h-[40rem] rounded-full bg-caramel/20 blur-3xl"></div>
     </div>
 
-    <!-- SPLASH "hello" pennellata -->
+    <!-- SPLASH "hello" pennarello -->
     <div id="splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-sand via-beige to-gold">
       <div class="text-center px-6">
-        <h1 id="splashHello" class="font-pacifico text-7xl md:text-8xl drop-shadow-sm" aria-label="hello"></h1>
+        <h1 id="splashHello" class="title-script drop-shadow-sm" aria-label="hello"></h1>
         <div id="brushLine" class="mx-auto mt-4 h-2 w-0 bg-caramel rounded-full"></div>
         <button id="skipSplash" class="mt-10 inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-ink/20 text-ink/80 hover:text-ink hover:bg-white/40 backdrop-blur-sm"><span data-i18n="splash_enter">Entra</span></button>
       </div>
@@ -82,13 +107,13 @@
         <a href="#home" class="font-semibold text-lg tracking-tight">Noemi Alderisi</a>
         <nav class="hidden md:flex items-center gap-6 text-sm">
           <a class="hover:text-caramel" href="#progetti" data-i18n="nav_projects">Progetti</a>
-          <a class="hover:text-caramel" href="#competenze" data-i18n="nav_skills">Competenze</a>
+          <a class="hover:text-caramel" href="#strumenti" data-i18n="nav_tools">Strumenti</a>
           <a class="hover:text-caramel" href="#esperienza" data-i18n="nav_experience">Esperienza</a>
           <a class="hover:text-caramel" href="#contatti" data-i18n="nav_contact">Contatti</a>
           <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10" href="#cv" aria-label="Scarica CV"><span data-i18n="nav_cv">CV</span> ↗</a>
         </nav>
         <div class="flex items-center gap-2">
-          <!-- Selettore lingua -->
+          <!-- Language switcher -->
           <div class="relative">
             <button id="langBtn" class="px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-gold/10 text-sm" aria-haspopup="true" aria-expanded="false">IT</button>
             <div id="langMenu" class="hidden absolute right-0 mt-2 w-32 rounded-xl border border-beige/70 bg-white dark:bg-ink shadow-soft overflow-hidden">
@@ -100,11 +125,10 @@
           <button id="menuBtn" class="md:hidden p-2 rounded-xl border border-beige/70" aria-label="Apri menu">☰</button>
         </div>
       </div>
-      <!-- Mobile menu -->
       <div id="mobileMenu" class="md:hidden hidden border-t border-beige/70">
         <nav class="max-w-6xl mx-auto px-4 py-3 grid gap-3 text-sm">
           <a class="hover:text-caramel" href="#progetti" data-i18n="nav_projects">Progetti</a>
-          <a class="hover:text-caramel" href="#competenze" data-i18n="nav_skills">Competenze</a>
+          <a class="hover:text-caramel" href="#strumenti" data-i18n="nav_tools">Strumenti</a>
           <a class="hover:text-caramel" href="#esperienza" data-i18n="nav_experience">Esperienza</a>
           <a class="hover:text-caramel" href="#contatti" data-i18n="nav_contact">Contatti</a>
           <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10 w-max" href="#cv"><span data-i18n="nav_cv">CV</span></a>
@@ -113,147 +137,127 @@
     </header>
 
     <!-- HERO -->
-    <section id="home" class="pt-20 md:pt-28">
+    <section id="home" class="pt-16 md:pt-20">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <p class="text-sm uppercase tracking-widest text-caramel font-medium"><span data-i18n="portfolio">Portfolio</span></p>
-          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mt-3">
-            <span data-i18n="hero_intro">Ciao, sono</span> <span class="text-caramel">Noemi</span>.<br />
-            <span data-i18n="hero_tagline">Costruisco esperienze web pulite e performanti.</span>
-          </h1>
-          <p class="mt-5 text-ink/70 dark:text-beige/80 max-w-prose">
-            Breve bio di 2–3 righe: specializzazione, tecnologie preferite e valore che porti.
-          </p>
+          <p class="kicker uppercase tracking-widest text-caramel" data-i18n="portfolio">Portfolio</p>
+          <h1 class="kicker mt-3"><span data-i18n="hero_intro">Ciao, sono</span> <span class="text-caramel">Noemi</span>.</h1>
+          <p class="bodycopy mt-5" data-i18n="hero_desc_it">ciao! sono Noemi. ho una passione per il caffè, punti vettoriali e pixel perfetti. creo marchi e design che ti fanno dire "wow". ricordando sempre che il design è arte, ma con un obiettivo!</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <a href="#contatti" class="px-5 py-2.5 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition"><span data-i18n="cta_contact">Contattami</span></a>
             <a href="#progetti" class="px-5 py-2.5 rounded-xl border border-beige/70 hover:bg-gold/10"><span data-i18n="cta_projects">Guarda i progetti</span></a>
           </div>
           <div class="mt-6 flex items-center gap-3">
-            <!-- LinkedIn icon -->
             <a id="lnkLinkedinHero" href="https://www.linkedin.com/in/noemi-alderisi-7319a0313/" target="_blank" rel="noopener" aria-label="LinkedIn di Noemi Alderisi" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V9h3v10zM6.5 7.8c-.96 0-1.7-.78-1.7-1.8s.74-1.8 1.7-1.8c.96 0 1.7.78 1.7 1.8s-.74 1.8-1.7 1.8zM20 19h-3v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95V19h-3V9h2.88v1.36h.04c.4-.76 1.38-1.56 2.85-1.56 3.05 0 3.62 2.01 3.62 4.62V19z"/></svg>
             </a>
-            <!-- Email icon -->
             <a id="lnkEmailHero" href="mailto:noemialderisi@gmail.com" aria-label="Invia un'email a noemialderisi@gmail.com" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065ZM0 8l12 7 12-7v12H0V8Z"/></svg>
             </a>
+            <a href="tel:+393458346898" aria-label="Chiama Noemi" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.4 22 2 13.6 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+            </a>
           </div>
         </div>
-        <div class="relative">
-          <div class="aspect-square rounded-3xl bg-gradient-to-br from-sand to-gold dark:from-cocoa/50 dark:to-ink/50 p-1">
-            <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?q=80&w=1000&auto=format&fit=crop" alt="Ritratto o immagine tematica" class="w-full h-full object-cover rounded-2xl" />
+        <div class="relative flip-wrap">
+          <div id="flipCard" class="flip rounded-3xl">
+            <div class="flip-face">
+              <div class="aspect-square rounded-3xl overflow-hidden shadow-soft">
+                <img src="images/noemi-photo.jpg" alt="Noemi che dipinge" class="w-full h-full object-cover" />
+              </div>
+            </div>
+            <div class="flip-face flip-back absolute inset-0 rounded-3xl overflow-hidden shadow-soft">
+              <img src="images/noemi-avatar.jpg" alt="Avatar illustrato di Noemi" class="w-full h-full object-cover" />
+            </div>
           </div>
+          <button id="flipBtn" class="absolute bottom-4 right-4 px-3 py-1.5 text-sm rounded-xl border border-beige/70 bg-white/70 backdrop-blur hover:bg-gold/10">Avatar ↔ Foto</button>
         </div>
       </div>
     </section>
 
-    <!-- PROGETTI -->
+    <!-- PROGETTI (placeholder) -->
     <section id="progetti" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="flex items-end justify-between gap-4">
-          <h2 class="text-2xl md:text-3xl font-bold" data-i18n="projects_title">Progetti in evidenza</h2>
+          <h2 class="kicker" data-i18n="projects_title">Progetti in evidenza</h2>
           <a href="#" class="text-sm underline decoration-dotted" data-i18n="projects_all">Tutti i progetti</a>
         </div>
-        <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Card progetto placeholder -->
-          <article class="rounded-2xl border border-beige/70 overflow-hidden hover:shadow-soft transition bg-white/80 dark:bg-ink/30">
-            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop" alt="Anteprima progetto 1" class="w-full h-44 object-cover" />
-            <div class="p-5">
-              <h3 class="font-semibold text-lg">Progetto Uno</h3>
-              <p class="mt-2 text-sm text-ink/70 dark:text-beige/80">Breve descrizione del progetto: problema, soluzione e impatto.</p>
-              <div class="mt-3 flex flex-wrap gap-2 text-xs">
-                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">React</span>
-                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">Tailwind</span>
-              </div>
-              <div class="mt-4 flex items-center gap-4 text-sm">
-                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Demo</a>
-                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Codice</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="rounded-2xl border border-beige/70 overflow-hidden hover:shadow-soft transition bg-white/80 dark:bg-ink/30">
-            <img src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=1200&auto=format&fit=crop" alt="Anteprima progetto 2" class="w-full h-44 object-cover" />
-            <div class="p-5">
-              <h3 class="font-semibold text-lg">Progetto Due</h3>
-              <p class="mt-2 text-sm text-ink/70 dark:text-beige/80">Breve descrizione: tecnologie, responsabilità, risultati.</p>
-              <div class="mt-3 flex flex-wrap gap-2 text-xs">
-                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">Next.js</span>
-                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">TypeScript</span>
-              </div>
-              <div class="mt-4 flex items-center gap-4 text-sm">
-                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Demo</a>
-                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Codice</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="rounded-2xl border border-beige/70 overflow-hidden hover:shadow-soft transition bg-white/80 dark:bg-ink/30">
-            <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?q=80&w=1200&auto=format&fit=crop" alt="Anteprima progetto 3" class="w-full h-44 object-cover" />
-            <div class="p-5">
-              <h3 class="font-semibold text-lg">Progetto Tre</h3>
-              <p class="mt-2 text-sm text-ink/70 dark:text-beige/80">Breve descrizione: obiettivi, metriche, link.</p>
-              <div class="mt-3 flex flex-wrap gap-2 text-xs">
-                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">Node</span>
-                <span class="px-2 py-1 rounded-lg bg-sand/50 border border-beige/70">PostgreSQL</span>
-              </div>
-              <div class="mt-4 flex items-center gap-4 text-sm">
-                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Demo</a>
-                <a class="underline decoration-dotted" href="#" target="_blank" rel="noopener">Codice</a>
-              </div>
-            </div>
-          </article>
-        </div>
+        <p class="bodycopy mt-4 opacity-70" data-i18n="projects_soon">Presto in arrivo: aggiungeremo i tuoi progetti migliori.</p>
       </div>
     </section>
 
-    <!-- COMPETENZE -->
-    <section id="competenze" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
+    <!-- STRUMENTI -->
+    <section id="strumenti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="skills_title">Competenze</h2>
-        <p class="mt-2 text-ink/70 dark:text-beige/80" data-i18n="skills_desc">Tecnologie e strumenti che uso con più frequenza.</p>
-        <ul class="mt-6 flex flex-wrap gap-2">
-          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">JavaScript / TypeScript</li>
-          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">React / Next.js</li>
-          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">HTML / CSS / Tailwind</li>
-          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Node / Express</li>
-          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">SQL / PostgreSQL</li>
-          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Git / GitHub</li>
+        <h2 class="kicker" data-i18n="tools_title">Strumenti</h2>
+        <p class="bodycopy mt-2 opacity-80" data-i18n="tools_desc">I software che uso ogni giorno.</p>
+        <ul class="mt-6 flex flex-wrap gap-2 text-[16pt]">
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Figma</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Procreate</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Canva</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">CapCut</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Adobe InDesign</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Adobe Photoshop</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Adobe Illustrator</li>
+          <li class="px-3 py-1.5 rounded-xl bg-white dark:bg-ink/40 border border-beige/70">Adobe After Effects</li>
         </ul>
       </div>
     </section>
 
-    <!-- ESPERIENZA -->
+    <!-- ESPERIENZA + FORMAZIONE -->
     <section id="esperienza" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="experience_title">Esperienza</h2>
+        <h2 class="kicker" data-i18n="experience_title">Esperienza</h2>
         <ol class="relative mt-8">
           <li class="mb-10 ms-6">
             <span class="absolute -start-3 flex items-center justify-center w-6 h-6 bg-caramel rounded-full ring-8 ring-white dark:ring-ink"></span>
             <div class="p-5 rounded-2xl border border-beige/70">
-              <h3 class="font-semibold">Ruolo · Azienda</h3>
-              <p class="text-sm text-ink/60 dark:text-beige/80">Gen 2023 — Presente · Città</p>
-              <p class="mt-2 text-sm">Responsabilità principali e risultati chiave (bullet brevi).</p>
+              <h3 class="font-bold text-[20pt]">Graphic Designer – Freelance</h3>
+              <p class="text-[16pt] opacity-80">Set. 2022 — Presente · Remoto</p>
+              <p class="mt-2 text-[16pt] opacity-90">Branding, grafica per la stampa e digital, sviluppo file esecutivi e identità visive.</p>
             </div>
           </li>
           <li class="mb-10 ms-6">
             <span class="absolute -start-3 flex items-center justify-center w-6 h-6 bg-caramel rounded-full ring-8 ring-white dark:ring-ink"></span>
             <div class="p-5 rounded-2xl border border-beige/70">
-              <h3 class="font-semibold">Ruolo · Azienda</h3>
-              <p class="text-sm text-ink/60 dark:text-beige/80">Mag 2021 — Dic 2022 · Remoto</p>
-              <p class="mt-2 text-sm">Sintesi dell'impatto, metriche, strumenti usati.</p>
+              <h3 class="font-bold text-[20pt]">Social Media Manager – LSP Media</h3>
+              <p class="text-[16pt] opacity-80">Lug. 2025 — Presente · Remoto</p>
+              <p class="mt-2 text-[16pt] opacity-90">Pianificazione contenuti, visual per social, ottimizzazione brand touchpoints.</p>
             </div>
           </li>
         </ol>
+
+        <div class="grid md:grid-cols-2 gap-6 mt-10">
+          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
+            <h3 class="font-bold text-[20pt]">Formazione</h3>
+            <ul class="mt-3 space-y-2 text-[16pt]">
+              <li><strong>Accademia di Belle Arti, Catania</strong> — Visual Communication Design (2021–Presente)</li>
+              <li><strong>Liceo Artistico “M.M. Lazzaro”, Catania</strong> — Grafica Pubblicitaria (2015–2020)</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
+            <h3 class="font-bold text-[20pt]">Workshop & Certificazioni</h3>
+            <ul class="mt-3 space-y-2 text-[16pt]">
+              <li>Workshop con <strong>Aeroporto di Catania</strong>: pannelli di awareness su oggetti “pericolosi” ai raggi X (illusioni visive).</li>
+              <li>Workshop con <strong>Comune di Catania</strong> e scuole: tutoraggio annuale, mostra itinerante finale (3 giorni).</li>
+              <li>Corso Sicurezza sul Lavoro — completato 2024.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30 mt-6">
+          <h3 class="font-bold text-[20pt]">Lingue</h3>
+          <p class="text-[16pt]">Italiano (madrelingua) · Inglese (intermedio)</p>
+        </div>
       </div>
     </section>
 
-    <!-- CONTATTI (senza form, solo icone) -->
+    <!-- CONTATTI -->
     <section id="contatti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h2 class="text-2xl md:text-3xl font-bold" data-i18n="contact_title">Contattami</h2>
-          <p class="mt-2 text-ink/70 dark:text-beige/80" data-i18n="contact_pref">Preferisci scrivermi direttamente?</p>
+          <h2 class="kicker" data-i18n="contact_title">Contattami</h2>
+          <p class="bodycopy mt-2 opacity-80" data-i18n="contact_pref">Preferisci scrivermi direttamente?</p>
           <div class="mt-6 flex items-center gap-4">
             <a id="btnEmail" href="mailto:noemialderisi@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition" aria-label="Invia un'email a Noemi">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065ZM0 8l12 7 12-7v12H0V8Z"/></svg>
@@ -263,11 +267,15 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V9h3v10zM6.5 7.8c-.96 0-1.7-.78-1.7-1.8s.74-1.8 1.7-1.8c.96 0 1.7.78 1.7 1.8s-.74 1.8-1.7 1.8zM20 19h-3v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95V19h-3V9h2.88v1.36h.04c.4-.76 1.38-1.56 2.85-1.56 3.05 0 3.62 2.01 3.62 4.62V19z"/></svg>
               <span data-i18n="linkedin_button">LinkedIn</span>
             </a>
+            <a href="tel:+393458346898" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-beige/70 hover:bg-gold/10" aria-label="Chiama Noemi">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.4 22 2 13.6 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+              <span>Telefono</span>
+            </a>
           </div>
         </div>
         <div class="rounded-3xl p-1 bg-gradient-to-br from-sand to-gold">
           <div class="rounded-2xl p-6 bg-white/70 dark:bg-ink/60">
-            <p class="text-sm text-ink/70 dark:text-beige/80" data-i18n="copy_prompt">Oppure copia l'indirizzo email:</p>
+            <p class="text-[16pt] opacity-80" data-i18n="copy_prompt">Oppure copia l'indirizzo email:</p>
             <div class="mt-2 flex items-center gap-3">
               <code class="px-3 py-1.5 rounded-lg bg-sand/60 border border-beige/70 select-all">noemialderisi@gmail.com</code>
               <button id="copyMail" class="px-3 py-1.5 rounded-lg border border-beige/70 hover:bg-gold/10 text-sm" data-i18n="copy">Copia</button>
@@ -291,26 +299,18 @@
 
     <script>
       // Anno dinamico
-      (function(){
-        const y = document.getElementById('year');
-        if (y) y.textContent = new Date().getFullYear();
-      })();
+      (function(){ const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear(); })();
 
       // Toggle tema
       document.getElementById('themeToggle').addEventListener('click', () => {
-        const root = document.documentElement;
-        const isDark = root.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        const root = document.documentElement; const isDark = root.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
 
       // Mobile menu
-      const menuBtn = document.getElementById('menuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
+      const menuBtn = document.getElementById('menuBtn'); const mobileMenu = document.getElementById('mobileMenu');
+      menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-      // ===== SPLASH typing + pennellata =====
+      // Splash typing + pennarello
       const helloText = 'hello';
       const el = document.getElementById('splashHello');
       const line = document.getElementById('brushLine');
@@ -319,152 +319,55 @@
 
       function typeHello(i = 0) {
         if (!el) return;
-        if (i <= helloText.length) {
-          el.textContent = helloText.slice(0, i);
-          setTimeout(() => typeHello(i + 1), 120);
-        } else {
-          // Animazione "pennello": linea che cresce fino alla larghezza del testo
-          const w = Math.min(el.getBoundingClientRect().width, 620);
-          line.style.transition = 'width .6s ease';
-          line.style.width = w + 'px';
-          // Chiudi splash dopo poco
-          setTimeout(hideSplash, 900);
-        }
+        if (i <= helloText.length) { el.textContent = helloText.slice(0, i); setTimeout(() => typeHello(i + 1), 110); }
+        else { const w = Math.min(el.getBoundingClientRect().width, 620); line.style.transition = 'width .6s ease'; line.style.width = w + 'px'; setTimeout(hideSplash, 900); }
       }
+      function hideSplash(){ splash.classList.add('hidden'); }
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => setTimeout(() => typeHello(1), 80)); } else { window.addEventListener('load', () => setTimeout(() => typeHello(1), 80)); }
+      skip.addEventListener('click', hideSplash); splash.addEventListener('click', hideSplash);
 
-      function hideSplash(){
-        splash.classList.add('hidden');
-      }
+      // Copy email
+      const copyBtn = document.getElementById('copyMail'); const copyMsg = document.getElementById('copyMsg');
+      if (copyBtn) { copyBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText('noemialderisi@gmail.com'); } catch(e){} copyMsg.classList.remove('hidden'); setTimeout(()=>copyMsg.classList.add('hidden'), 1200); }); }
 
-      // Avvia quando i font sono pronti per evitare lampeggi o testo invisibile
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => setTimeout(() => typeHello(1), 80));
-      } else {
-        window.addEventListener('load', () => setTimeout(() => typeHello(1), 80));
-      }
-      skip.addEventListener('click', hideSplash);
-      splash.addEventListener('click', hideSplash);
+      // Flip avatar/photo
+      const flipCard = document.getElementById('flipCard'); const flipBtn = document.getElementById('flipBtn');
+      function flip(){ flipCard.classList.toggle('is-flipped'); }
+      flipBtn.addEventListener('click', flip);
+      flipCard.addEventListener('click', flip);
 
-      // Copia email
-      const copyBtn = document.getElementById('copyMail');
-      const copyMsg = document.getElementById('copyMsg');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', async () => {
-          try { await navigator.clipboard.writeText('noemialderisi@gmail.com'); }
-          catch(e) {}
-          copyMsg.classList.remove('hidden');
-          setTimeout(()=>copyMsg.classList.add('hidden'), 1200);
-        });
-      }
-
-      // ===== i18n semplice (IT/EN) =====
+      // ===== i18n (IT/EN) =====
       const i18n = {
         it: {
-          nav_projects: 'Progetti',
-          nav_skills: 'Competenze',
-          nav_experience: 'Esperienza',
-          nav_contact: 'Contatti',
-          nav_cv: 'CV',
-          portfolio: 'Portfolio',
-          hero_intro: 'Ciao, sono',
-          hero_tagline: 'Costruisco esperienze web pulite e performanti.',
-          cta_contact: 'Contattami',
-          cta_projects: 'Guarda i progetti',
-          projects_title: 'Progetti in evidenza',
-          projects_all: 'Tutti i progetti',
-          skills_title: 'Competenze',
-          skills_desc: 'Tecnologie e strumenti che uso con più frequenza.',
-          experience_title: 'Esperienza',
-          contact_title: 'Contattami',
-          contact_pref: 'Preferisci scrivermi direttamente?',
-          email_button: 'Email',
-          linkedin_button: 'LinkedIn',
-          copy_prompt: "Oppure copia l'indirizzo email:",
-          copy: 'Copia',
-          copied: 'Copiato!',
-          footer_rights: 'Tutti i diritti riservati.',
-          splash_enter: 'Entra',
-          aria_email: "Invia un'email a Noemi",
-          aria_linkedin: 'LinkedIn di Noemi Alderisi',
-          aria_theme: 'Cambia tema'
+          nav_projects: 'Progetti', nav_tools: 'Strumenti', nav_experience: 'Esperienza', nav_contact: 'Contatti', nav_cv: 'CV',
+          portfolio: 'Portfolio', hero_intro: 'Ciao, sono',
+          hero_desc_it: 'ciao! sono Noemi. ho una passione per il caffè, punti vettoriali e pixel perfetti. creo marchi e design che ti fanno dire "wow". ricordando sempre che il design è arte, ma con un obiettivo!',
+          cta_contact: 'Contattami', cta_projects: 'Guarda i progetti',
+          projects_title: 'Progetti in evidenza', projects_all: 'Tutti i progetti', projects_soon: 'Presto in arrivo: aggiungeremo i tuoi progetti migliori.',
+          tools_title: 'Strumenti', tools_desc: 'I software che uso ogni giorno.',
+          experience_title: 'Esperienza', contact_title: 'Contattami', contact_pref: 'Preferisci scrivermi direttamente?',
+          email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: "Oppure copia l'indirizzo email:", copy: 'Copia', copied: 'Copiato!', footer_rights: 'Tutti i diritti riservati.', splash_enter: 'Entra',
+          aria_email: "Invia un'email a Noemi", aria_linkedin: 'LinkedIn di Noemi Alderisi', aria_theme: 'Cambia tema'
         },
         en: {
-          nav_projects: 'Projects',
-          nav_skills: 'Skills',
-          nav_experience: 'Experience',
-          nav_contact: 'Contact',
-          nav_cv: 'Resume',
-          portfolio: 'Portfolio',
-          hero_intro: "Hi, I'm",
-          hero_tagline: 'I build clean, performant web experiences.',
-          cta_contact: 'Contact me',
-          cta_projects: 'See projects',
-          projects_title: 'Featured projects',
-          projects_all: 'All projects',
-          skills_title: 'Skills',
-          skills_desc: 'Technologies and tools I use most.',
-          experience_title: 'Experience',
-          contact_title: 'Get in touch',
-          contact_pref: 'Prefer to write me directly?',
-          email_button: 'Email',
-          linkedin_button: 'LinkedIn',
-          copy_prompt: 'Or copy the email address:',
-          copy: 'Copy',
-          copied: 'Copied!',
-          footer_rights: 'All rights reserved.',
-          splash_enter: 'Enter',
-          aria_email: 'Send an email to Noemi',
-          aria_linkedin: 'Noemi Alderisi on LinkedIn',
-          aria_theme: 'Toggle theme'
+          nav_projects: 'Projects', nav_tools: 'Tools', nav_experience: 'Experience', nav_contact: 'Contact', nav_cv: 'Resume',
+          portfolio: 'Portfolio', hero_intro: "Hi, I'm",
+          hero_desc_it: "Hi! I'm Noemi. I love coffee, vector points and pixel perfection. I create brands and designs that make you say 'wow'—always remembering design is art, but with a goal!",
+          cta_contact: 'Contact me', cta_projects: 'See projects',
+          projects_title: 'Featured projects', projects_all: 'All projects', projects_soon: 'Coming soon: we will add your best projects.',
+          tools_title: 'Tools', tools_desc: 'The software I use daily.',
+          experience_title: 'Experience', contact_title: 'Get in touch', contact_pref: 'Prefer to write me directly?',
+          email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: 'Or copy the email address:', copy: 'Copy', copied: 'Copied!', footer_rights: 'All rights reserved.', splash_enter: 'Enter',
+          aria_email: 'Send an email to Noemi', aria_linkedin: 'Noemi Alderisi on LinkedIn', aria_theme: 'Toggle theme'
         }
       };
-
-      const langBtn = document.getElementById('langBtn');
-      const langMenu = document.getElementById('langMenu');
+      const langBtn = document.getElementById('langBtn'); const langMenu = document.getElementById('langMenu');
       function getLang(){ return localStorage.getItem('lang') || 'it'; }
-
-      function applyLang(lang){
-        const dict = i18n[lang] || i18n.it;
-        document.documentElement.lang = lang;
-        langBtn.textContent = lang.toUpperCase();
-        // Testi statici con data-i18n
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          if (dict[key]) el.textContent = dict[key];
-        });
-        // ARIA
-        const emailHero = document.getElementById('lnkEmailHero');
-        const linkedinHero = document.getElementById('lnkLinkedinHero');
-        const btnEmail = document.getElementById('btnEmail');
-        const btnLinkedin = document.getElementById('btnLinkedin');
-        const themeToggle = document.getElementById('themeToggle');
-        if (emailHero) emailHero.setAttribute('aria-label', dict.aria_email);
-        if (linkedinHero) linkedinHero.setAttribute('aria-label', dict.aria_linkedin);
-        if (btnEmail) btnEmail.setAttribute('aria-label', dict.aria_email);
-        if (btnLinkedin) btnLinkedin.setAttribute('aria-label', dict.aria_linkedin);
-        if (themeToggle) themeToggle.setAttribute('aria-label', dict.aria_theme);
-      }
-
+      function applyLang(lang){ const dict = i18n[lang] || i18n.it; document.documentElement.lang = lang; langBtn.textContent = lang.toUpperCase(); document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[key]) el.textContent = dict[key]; }); const emailHero = document.getElementById('lnkEmailHero'); const linkedinHero = document.getElementById('lnkLinkedinHero'); const btnEmail = document.getElementById('btnEmail'); const btnLinkedin = document.getElementById('btnLinkedin'); const themeToggle = document.getElementById('themeToggle'); if (emailHero) emailHero.setAttribute('aria-label', dict.aria_email); if (linkedinHero) linkedinHero.setAttribute('aria-label', dict.aria_linkedin); if (btnEmail) btnEmail.setAttribute('aria-label', dict.aria_email); if (btnLinkedin) btnLinkedin.setAttribute('aria-label', dict.aria_linkedin); if (themeToggle) themeToggle.setAttribute('aria-label', dict.aria_theme); }
       function setLang(lang){ localStorage.setItem('lang', lang); applyLang(lang); }
-
-      // Apri/chiudi menu lingua
-      langBtn.addEventListener('click', () => {
-        const open = !langMenu.classList.contains('hidden');
-        langMenu.classList.toggle('hidden');
-        langBtn.setAttribute('aria-expanded', String(!open));
-      });
-      langMenu.addEventListener('click', (e) => {
-        const target = e.target.closest('[data-set-lang]');
-        if (!target) return;
-        const lang = target.getAttribute('data-set-lang');
-        setLang(lang);
-        langMenu.classList.add('hidden');
-      });
-      document.addEventListener('click', (e)=>{
-        if (!langMenu.contains(e.target) && e.target !== langBtn) langMenu.classList.add('hidden');
-      });
-
-      // Inizializza lingua
+      langBtn.addEventListener('click', () => { const open = !langMenu.classList.contains('hidden'); langMenu.classList.toggle('hidden'); langBtn.setAttribute('aria-expanded', String(!open)); });
+      langMenu.addEventListener('click', (e) => { const target = e.target.closest('[data-set-lang]'); if (!target) return; const lang = target.getAttribute('data-set-lang'); setLang(lang); langMenu.classList.add('hidden'); });
+      document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) langMenu.classList.add('hidden'); });
       applyLang(getLang());
     </script>
   </body>
