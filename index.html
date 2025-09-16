@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it" class="scroll-smooth">
+<html lang="it" class="scroll-smooth dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -78,10 +78,10 @@
     <script>
       (function() {
         const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if ((stored === 'dark') || (!stored && prefersDark)) {
-          document.documentElement.classList.add('dark');
-        }
+        const root = document.documentElement;
+        // Default to dark theme unless user explicitly chose light
+        if (stored === 'light') { root.classList.remove('dark'); }
+        else { root.classList.add('dark'); }
       })();
     </script>
   </head>
@@ -121,7 +121,7 @@
               <button class="block w-full text-left px-3 py-2 hover:bg-gold/10 text-sm" data-set-lang="en">English</button>
             </div>
           </div>
-          <button id="themeToggle" class="p-2 rounded-xl border border-beige/70 hover:bg-gold/10" aria-label="Cambia tema">🌙</button>
+          <button id="themeToggle" class="p-2 rounded-xl border border-beige/70 hover:bg-gold/10" aria-label="Cambia tema"><span id="themeIcon" aria-hidden="true">🌙</span></button>
           <button id="menuBtn" class="md:hidden p-2 rounded-xl border border-beige/70" aria-label="Apri menu">☰</button>
         </div>
       </div>
@@ -170,7 +170,7 @@
               <img src="images/noemi-avatar.jpg" alt="Avatar illustrato di Noemi" class="w-full h-full object-cover" />
             </div>
           </div>
-          <button id="flipBtn" class="absolute bottom-4 right-4 px-3 py-1.5 text-sm rounded-xl border border-beige/70 bg-white/70 backdrop-blur hover:bg-gold/10">Avatar ↔ Foto</button>
+          <button id="flipBtn" class="absolute bottom-4 right-4 px-3 py-1.5 text-sm rounded-xl border border-beige/70 bg-white/70 backdrop-blur hover:bg-gold/10">Gira</button>
         </div>
       </div>
     </section>
@@ -302,9 +302,18 @@
       (function(){ const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear(); })();
 
       // Toggle tema
-      document.getElementById('themeToggle').addEventListener('click', () => {
-        const root = document.documentElement; const isDark = root.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      function renderThemeIcon(){ themeIcon.textContent = document.documentElement.classList.contains('dark') ? '🌙' : '☀️'; }
+      themeToggle.addEventListener('click', () => {
+        const root = document.documentElement;
+        const isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        renderThemeIcon();
       });
+      renderThemeIcon();
+
+            });
 
       // Mobile menu
       const menuBtn = document.getElementById('menuBtn'); const mobileMenu = document.getElementById('mobileMenu');
@@ -334,7 +343,7 @@
       const flipCard = document.getElementById('flipCard'); const flipBtn = document.getElementById('flipBtn');
       function flip(){ flipCard.classList.toggle('is-flipped'); }
       flipBtn.addEventListener('click', flip);
-      flipCard.addEventListener('click', flip);
+      // click-to-flip disabilitato: usa solo il bottone
 
       // ===== i18n (IT/EN) =====
       const i18n = {
