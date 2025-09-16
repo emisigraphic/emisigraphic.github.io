@@ -36,6 +36,8 @@
           /* Typewriter splash (Parfumerie) */
       #splashHello.caret::after{content:'';display:inline-block;width:2px;height:1em;background:#ab783e;margin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05em}
       @keyframes blink{50%{opacity:0}}
+          /* Colore scritta Hello (caramel) */
+      #splashHello{color:#ab783e;-webkit-text-stroke:0.5px rgba(255,255,255,.35);text-shadow:0 2px 10px rgba(0,0,0,.08),0 0 1px rgba(255,255,255,.25)}
     </style>
 
     <!-- Tailwind via CDN -->
@@ -230,15 +232,7 @@
           </li>
         </ol>
 
-        <div class="grid md:grid-cols-2 gap-6 mt-10">
-          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
-            <h3 class="font-bold text-[20pt]">Formazione</h3>
-            <ul class="mt-3 space-y-2 text-[16pt]">
-              <li><strong>Accademia di Belle Arti, Catania</strong> — Visual Communication Design (2021–Presente)</li>
-              <li><strong>Liceo Artistico “M.M. Lazzaro”, Catania</strong> — Grafica Pubblicitaria (2015–2020)</li>
-            </ul>
-          </div>
-          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
+        <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
             <h3 class="font-bold text-[20pt]">Workshop & Certificazioni</h3>
             <ul class="mt-3 space-y-2 text-[16pt]">
               <li>Workshop con <strong>Aeroporto di Catania</strong>: pannelli di awareness su oggetti “pericolosi” ai raggi X (illusioni visive).</li>
@@ -248,19 +242,43 @@
           </div>
         </div>
 
+        </div>
+    </section>
+    </section>
+
+    <!-- PIÙ INFO SU DI ME -->
+    <section id="piu-info" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="script-title" data-i18n="more_title">Più info su di me</h2>
+        <div class="grid md:grid-cols-2 gap-6 mt-8">
+          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
+            <h3 class="font-bold text-[20pt]">Formazione</h3>
+            <ul class="mt-3 space-y-2 text-[16pt]">
+              <li><strong>Accademia di Belle Arti, Catania</strong> — Visual Communication Design (2021–Presente)</li>
+              <li><strong>Liceo Artistico “M.M. Lazzaro”, Catania</strong> — Grafica Pubblicitaria (2015–2020)</li>
+            </ul>
+          </div>
+          <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30">
+            <h3 class="font-bold text-[20pt]">Workshop &amp; Certificazioni</h3>
+            <ul class="mt-3 space-y-2 text-[16pt]">
+              <li>Workshop con <strong>Aeroporto di Catania</strong>: pannelli di awareness su oggetti “pericolosi” ai raggi X (illusioni visive).</li>
+              <li>Workshop con <strong>Comune di Catania</strong> e scuole: tutoraggio annuale, mostra itinerante finale (3 giorni).</li>
+              <li>Corso Sicurezza sul Lavoro — completato 2024.</li>
+            </ul>
+          </div>
+        </div>
         <div class="p-5 rounded-2xl border border-beige/70 bg-white/60 dark:bg-ink/30 mt-6">
           <h3 class="font-bold text-[20pt]">Lingue</h3>
           <p class="text-[16pt]">Italiano (madrelingua) · Inglese (intermedio)</p>
         </div>
       </div>
     </section>
-    </section>
 
     <!-- CONTATTI -->
     <section id="contatti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          $1Contatti$2
+          Contatti
           <p class="bodycopy mt-2 opacity-80" data-i18n="contact_pref">Preferisci scrivermi direttamente?</p>
           <div class="mt-6 flex items-center gap-4">
             <a id="btnEmail" href="mailto:noemialderisi@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition" aria-label="Invia un'email a Noemi">
@@ -354,7 +372,7 @@
           cta_contact: 'Contattami', cta_projects: 'Guarda i progetti',
           projects_title: 'Progetti in evidenza', projects_all: 'Tutti i progetti', projects_soon: 'Presto in arrivo: aggiungeremo i tuoi progetti migliori.',
           tools_title: 'Strumenti', tools_desc: 'I software che uso ogni giorno.',
-          experience_title: 'Esperienza', contact_title: 'Contatti', contact_pref: 'Preferisci scrivermi direttamente?',
+          experience_title: 'Esperienza', more_title: 'Più info su di me', contact_title: 'Contatti', contact_pref: 'Preferisci scrivermi direttamente?',
           email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: "Oppure copia l'indirizzo email:", copy: 'Copia', copied: 'Copiato!', footer_rights: 'Tutti i diritti riservati.', splash_enter: 'Entra',
           aria_email: "Invia un'email a Noemi", aria_linkedin: 'LinkedIn di Noemi Alderisi', aria_theme: 'Cambia tema'
         },
@@ -365,7 +383,7 @@
           cta_contact: 'Contact me', cta_projects: 'See projects',
           projects_title: 'Featured projects', projects_all: 'All projects', projects_soon: 'Coming soon: we will add your best projects.',
           tools_title: 'Tools', tools_desc: 'The software I use daily.',
-          experience_title: 'Experience', contact_title: 'Get in touch', contact_pref: 'Prefer to write me directly?',
+          experience_title: 'Experience', more_title: 'More about me', contact_title: 'Get in touch', contact_pref: 'Prefer to write me directly?',
           email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: 'Or copy the email address:', copy: 'Copy', copied: 'Copied!', footer_rights: 'All rights reserved.', splash_enter: 'Enter',
           aria_email: 'Send an email to Noemi', aria_linkedin: 'Noemi Alderisi on LinkedIn', aria_theme: 'Toggle theme'
         }
