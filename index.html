@@ -27,12 +27,15 @@
       }
           /* Splash SVG draw "Hello" */
       #helloSvg{width:min(90vw,900px);height:auto;}
-      #helloStroke{fill:#ab783e;stroke:#ab783e;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2400;stroke-dashoffset:2400;animation:helloDraw var(--draw-duration,2.8s) ease-out forwards}
-      #helloFill{fill:#ab783e;opacity:0;animation:helloFill .6s ease-out calc(var(--draw-duration,2.8s) - .2s) forwards}
-      #marker{position:absolute;width:56px;height:56px;transition:left .3s ease, top .3s ease, transform .3s ease;transform-origin:70% 80%;}
+      .hello-letter-stroke{fill:transparent;stroke:#ab783e;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:helloDraw var(--dur,600ms) ease-out var(--delay,0ms) forwards}
+      .hello-letter-fill{fill:#ab783e;opacity:0;animation:helloFill .4s ease-out calc(var(--delay,0ms) + var(--dur,600ms) - .1s) forwards}
+      #marker{position:absolute;width:56px;height:56px;transition:left .25s ease, top .25s ease, transform .25s ease;transform-origin:70% 80%;}
       #palette .blob{box-shadow:0 8px 18px -8px rgba(0,0,0,.3)}
       @keyframes helloDraw{to{stroke-dashoffset:0}}
       @keyframes helloFill{to{opacity:1}}
+          /* Typewriter splash (Parfumerie) */
+      #splashHello.caret::after{content:'';display:inline-block;width:2px;height:1em;background:#ab783e;margin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05em}
+      @keyframes blink{50%{opacity:0}}
     </style>
 
     <!-- Tailwind via CDN -->
@@ -107,24 +110,11 @@
       <div class="absolute bottom-[-10rem] right-[-10rem] w-[40rem] h-[40rem] rounded-full bg-caramel/20 blur-3xl"></div>
     </div>
 
-    <!-- SPLASH: pennello che intinge nella tavolozza e scrive "Hello" -->
+    <!-- SPLASH: typewriter semplice con Parfumerie -->
     <div id="splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-sand via-beige to-gold">
-      <div class="absolute left-8 bottom-8 flex items-center" id="palette">
-        <span class="blob w-10 h-10 rounded-full bg-caramel caramel"></span>
-        <span class="blob w-10 h-10 rounded-full bg-gold -ml-3"></span>
-        <span class="blob w-10 h-10 rounded-full bg-sand -ml-3"></span>
+      <div class="text-center px-6">
+        <h1 id="splashHello" class="title-script drop-shadow-sm caret" aria-label="Hello"></h1>
       </div>
-      <div id="marker" style="left:48px; top: calc(100% - 120px);">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-          <rect x="6" y="22" width="40" height="12" rx="6" fill="#221505"/>
-          <rect x="30" y="22" width="16" height="12" rx="6" fill="#ab783e"/>
-          <path d="M6 22 L0 28 L6 34 Z" fill="#6e3010"/>
-        </svg>
-      </div>
-      <svg id="helloSvg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid meet">
-        <text id="helloStroke" x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Parfumerie Script Pro', Pacifico, cursive" font-size="220">Hello</text>
-        <text id="helloFill"   x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Parfumerie Script Pro', Pacifico, cursive" font-size="220">Hello</text>
-      </svg>
     </div>
 
     <!-- NAVBAR -->
@@ -169,21 +159,8 @@
           <p class="script-portfolio text-caramel" data-i18n="portfolio">Portfolio</p>
           <h1 class="kicker mt-3"><span data-i18n="hero_intro">Ciao, sono</span> <span class="text-caramel">Noemi</span>.</h1>
           <p class="bodycopy mt-5" data-i18n="hero_desc_it">Ho una passione per il caffè, punti vettoriali e pixel perfetti. Creo marchi e design che ti fanno dire "wow". Ricordando sempre che il design è arte, ma con un obiettivo!</p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#contatti" class="px-5 py-2.5 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition"><span data-i18n="cta_contact">Contattami</span></a>
-            
-          </div>
-          <div class="mt-6 flex items-center gap-3">
-            <a id="lnkLinkedinHero" href="https://www.linkedin.com/in/noemi-alderisi-7319a0313/" target="_blank" rel="noopener" aria-label="LinkedIn di Noemi Alderisi" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V9h3v10zM6.5 7.8c-.96 0-1.7-.78-1.7-1.8s.74-1.8 1.7-1.8c.96 0 1.7.78 1.7 1.8s-.74 1.8-1.7 1.8zM20 19h-3v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95V19h-3V9h2.88v1.36h.04c.4-.76 1.38-1.56 2.85-1.56 3.05 0 3.62 2.01 3.62 4.62V19z"/></svg>
-            </a>
-            <a id="lnkEmailHero" href="mailto:noemialderisi@gmail.com" aria-label="Invia un'email a noemialderisi@gmail.com" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065ZM0 8l12 7 12-7v12H0V8Z"/></svg>
-            </a>
-            <a href="tel:+393458346898" aria-label="Chiama Noemi" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige/70 hover:bg-gold/10">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.4 22 2 13.6 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
-            </a>
-          </div>
+          
+          
         </div>
         <div class="relative flip-wrap">
           <div id="flipCard" class="flip rounded-3xl">
@@ -283,7 +260,7 @@
     <section id="contatti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h2 class="script-title" data-i18n="contact_title">Contattami</h2>
+          $1Contatti$2
           <p class="bodycopy mt-2 opacity-80" data-i18n="contact_pref">Preferisci scrivermi direttamente?</p>
           <div class="mt-6 flex items-center gap-4">
             <a id="btnEmail" href="mailto:noemialderisi@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition" aria-label="Invia un'email a Noemi">
@@ -341,54 +318,22 @@
       const menuBtn = document.getElementById('menuBtn'); const mobileMenu = document.getElementById('mobileMenu');
       menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-      // Splash typing + pennarello
-      // ===== SPLASH: pennello + disegno "Hello" sincronizzati =====
+      // Splash typing — effetto macchina da scrivere (Parfumerie)
       const splash = document.getElementById('splash');
-      const helloSvg = document.getElementById('helloSvg');
-      const helloStroke = document.getElementById('helloStroke');
-      const marker = document.getElementById('marker');
-      const palDot = document.querySelector('#palette .caramel') || document.querySelector('#palette .blob');
-
-      const DRAW_MS = 2800; // durata dell'animazione di scrittura
-      function setDrawDuration(ms){ if (helloSvg) helloSvg.style.setProperty('--draw-duration', ms+'ms'); }
-      function moveMarker(x,y,rot=0){ marker.style.left = x+'px'; marker.style.top = y+'px'; marker.style.transform = `rotate(${rot}deg)`; }
-
-      function animateMarkerAlongText(){
-        const stageRect = splash.getBoundingClientRect();
-        const r = helloStroke.getBoundingClientRect();
-        const startX = r.left - stageRect.left - 6;
-        const endX = r.right - stageRect.left - 10;
-        const y = r.top - stageRect.top + r.height*0.65;
-        const t0 = performance.now();
-        function step(now){
-          const t = Math.min(1, (now - t0)/DRAW_MS);
-          const x = startX + (endX - startX)*t;
-          moveMarker(x, y, -15);
-          if (t < 1) requestAnimationFrame(step); else setTimeout(()=> splash.classList.add('hidden'), 500);
+      const helloEl = document.getElementById('splashHello');
+      const helloTxt = 'Hello';
+      function hideSplash(){ splash.classList.add('hidden'); }
+      function typeHello(i=0){
+        if (i <= helloTxt.length){
+          helloEl.textContent = helloTxt.slice(0,i);
+          setTimeout(()=>typeHello(i+1), 160);
+        } else {
+          helloEl.classList.remove('caret');
+          setTimeout(hideSplash, 650);
         }
-        requestAnimationFrame(step);
       }
-
-      function runSplash(){
-        setDrawDuration(DRAW_MS);
-        const stageRect = splash.getBoundingClientRect();
-        const pr = palDot.getBoundingClientRect();
-        // Posiziona vicino alla tavolozza
-        moveMarker(pr.left - stageRect.left + pr.width*0.1, pr.top - stageRect.top - 8, 0);
-        // Intinge
-        setTimeout(()=> moveMarker(pr.left - stageRect.left + pr.width*0.05, pr.top - stageRect.top + pr.height*0.2, -35), 220);
-        // Va all'inizio della parola e parte l'animazione
-        setTimeout(()=>{
-          const r = helloStroke.getBoundingClientRect();
-          const x0 = r.left - stageRect.left - 8;
-          const y0 = r.top - stageRect.top + r.height*0.65;
-          moveMarker(x0, y0, -15);
-          animateMarkerAlongText();
-        }, 900);
-      }
-
-      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(runSplash); }
-      else { window.addEventListener('load', runSplash); }
+      if (document.fonts && document.fonts.ready){ document.fonts.ready.then(()=> setTimeout(()=>typeHello(1), 150)); }
+      else { window.addEventListener('load', ()=> setTimeout(()=>typeHello(1), 150)); }
 
       // Copy email
       const copyBtn = document.getElementById('copyMail'); const copyMsg = document.getElementById('copyMsg');
@@ -409,7 +354,7 @@
           cta_contact: 'Contattami', cta_projects: 'Guarda i progetti',
           projects_title: 'Progetti in evidenza', projects_all: 'Tutti i progetti', projects_soon: 'Presto in arrivo: aggiungeremo i tuoi progetti migliori.',
           tools_title: 'Strumenti', tools_desc: 'I software che uso ogni giorno.',
-          experience_title: 'Esperienza', contact_title: 'Contattami', contact_pref: 'Preferisci scrivermi direttamente?',
+          experience_title: 'Esperienza', contact_title: 'Contatti', contact_pref: 'Preferisci scrivermi direttamente?',
           email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: "Oppure copia l'indirizzo email:", copy: 'Copia', copied: 'Copiato!', footer_rights: 'Tutti i diritti riservati.', splash_enter: 'Entra',
           aria_email: "Invia un'email a Noemi", aria_linkedin: 'LinkedIn di Noemi Alderisi', aria_theme: 'Cambia tema'
         },
