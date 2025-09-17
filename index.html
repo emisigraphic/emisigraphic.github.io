@@ -37,42 +37,7 @@
       #splashHello.caret::after{content:'';display:inline-block;width:2px;height:1em;background:#9a6f3e;margin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05emmargin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05em}
       @keyframes blink{50%{opacity:0}}
           /* Colore scritta Hello (caramel) */
-      #splashHello{color:#9a6f3e;-webkit-text-stroke:0.5px rgba(255,255,255,.35);text-shadow:0 2px 10px rgba(0,0,0,.08),0 0 1px rgba(255,255,255,.25)}
-          /* Colore e leggibilità scritta Hello (marrone/beige) */
-      #splashHello{color:#9a6f3e !important;-webkit-text-stroke:0.5px rgba(255,255,255,.35);text-shadow:0 2px 10px rgba(0,0,0,.08),0 0 1px rgba(255,255,255,.25)}
-
-      /* Lista professionale per "Più info su di me" */
-      .infoList .dot{box-shadow:0 8px 18px -8px rgba(0,0,0,.25)}
-    </style>
-
-    <!-- Tailwind via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Public Sans', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-              script: ['Parfumerie Script Pro', 'Pacifico', 'cursive']
-            },
-            colors: {
-              caramel: '#ab783e',
-              gold: '#d9a062',
-              cocoa: '#6e3010',
-              ink: '#221505',
-              sand: '#dfcda2',
-              beige: '#d1bc92',
-              white: '#ffffff',
-            },
-            boxShadow: { soft: '0 10px 30px -10px rgba(0,0,0,0.2)' },
-          },
-        },
-        darkMode: 'class',
-      };
-    </script>
-
-    <style>
-      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      #splashHello{color:#9a6f3e !important;}
       section:target { scroll-margin-top: 7rem; }
       /* Tipografia richiesta */
       .title-script { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 145pt; line-height: .9; }
@@ -90,7 +55,7 @@
       /* Splash visibility & styling */
       #splash { transition: opacity .7s ease, visibility .7s ease; }
       #splash.hidden { opacity: 0; visibility: hidden; }
-      #splashHello { color: #9a6f3e; -webkit-text-stroke: 1px rgba(255,255,255,0.45); text-shadow: 0 2px 10px rgba(0,0,0,.08), 0 0 1px rgba(255,255,255,.35); }
+      #splashHello{color:#9a6f3e !important;}
 
       /* Flip avatar/photo */
       .flip-wrap { perspective: 1200px; }
