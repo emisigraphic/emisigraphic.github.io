@@ -4,20 +4,44 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Portfolio di Noemi Alderisi</title>
-    <meta name="description" content="Portfolio personale di Noemi Alderisi: brand, illustrazione e design mirato al risultato." />
-    <meta property="og:title" content="Portfolio di Noemi Alderisi" />
-    <meta property="og:description" content="Portfolio personale di Noemi Alderisi: brand, illustrazione e design mirato al risultato." />
-    <meta property="og:type" content="website" />
+    <meta name="description" content="Portfolio di Noemi Alderisi: brand, illustrazione e design mirato al risultato." />
 
-    <!-- Font -->
-    <!-- Preload font script locale (TTF) -->
+    <!-- Preload font Parfumerie locale (TTF) -->
     <link rel="preload" href="/fonts/ParfumerieScriptPro.ttf" as="font" type="font/ttf" crossorigin>
+
     <!-- Public Sans (Google Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Parfumerie Script Pro (richiede file licenziato). Placeholder + fallback -->
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Public Sans', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+              script: ['Parfumerie Script Pro', 'Pacifico', 'cursive']
+            },
+            colors: {
+              caramel: '#ab783e',
+              gold: '#d9a062',
+              cocoa: '#6e3010',
+              ink: '#221505',
+              sand: '#dfcda2',
+              beige: '#d1bc92',
+              white: '#ffffff',
+            },
+            boxShadow: { soft: '0 10px 30px -10px rgba(0,0,0,0.2)' },
+          },
+        },
+        darkMode: 'class',
+      };
+    </script>
+
     <style>
+      /* Font face Parfumerie (TTF) */
       @font-face {
         font-family: 'Parfumerie Script Pro';
         src: url('/fonts/ParfumerieScriptPro.ttf') format('truetype');
@@ -25,37 +49,34 @@
         font-style: normal;
         font-display: swap;
       }
-          /* Splash SVG draw "Hello" */
-      #helloSvg{width:min(90vw,900px);height:auto;}
-      .hello-letter-stroke{fill:transparent;stroke:#ab783e;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:helloDraw var(--dur,600ms) ease-out var(--delay,0ms) forwards}
-      .hello-letter-fill{fill:#ab783e;opacity:0;animation:helloFill .4s ease-out calc(var(--delay,0ms) + var(--dur,600ms) - .1s) forwards}
-      #marker{position:absolute;width:56px;height:56px;transition:left .25s ease, top .25s ease, transform .25s ease;transform-origin:70% 80%;}
-      #palette .blob{box-shadow:0 8px 18px -8px rgba(0,0,0,.3)}
-      @keyframes helloDraw{to{stroke-dashoffset:0}}
-      @keyframes helloFill{to{opacity:1}}
-          /* Typewriter splash (Parfumerie) */
-      #splashHello.caret::after{content:'';display:inline-block;width:2px;height:1em;background:#9a6f3e;margin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05emmargin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05em}
-      @keyframes blink{50%{opacity:0}}
-          /* Colore scritta Hello (caramel) */
-      #splashHello{color:#9a6f3e !important;}
+
+      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
       section:target { scroll-margin-top: 7rem; }
+
       /* Tipografia richiesta */
       .title-script { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 145pt; line-height: .9; }
       @media (max-width: 768px){ .title-script { font-size: 80pt; } }
       .kicker { font-family: 'Public Sans', system-ui, sans-serif; font-weight: 700; font-size: 20pt; }
       .bodycopy { font-family: 'Public Sans', system-ui, sans-serif; font-weight: 400; font-size: 20pt; }
 
-      
       /* Script titles for sections */
-      .script-title { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 56pt; line-height: 1; }
-      @media (max-width: 768px){ .script-title { font-size: 36pt; } }
       .script-portfolio { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 80pt; line-height: 1; }
       @media (max-width: 768px){ .script-portfolio { font-size: 46pt; } }
+      .script-title { font-family: 'Parfumerie Script Pro', Pacifico, cursive; font-size: 56pt; line-height: 1; }
+      @media (max-width: 768px){ .script-title { font-size: 36pt; } }
 
-      /* Splash visibility & styling */
-      #splash { transition: opacity .7s ease, visibility .7s ease; }
-      #splash.hidden { opacity: 0; visibility: hidden; }
-      #splashHello{color:#9a6f3e !important;}
+      /* Splash typewriter */
+      #splashHello { color:#9a6f3e !important; } /* marrone/beige scuro uniforme */
+      #splashHello.caret::after{
+        content:'';
+        display:inline-block;
+        width:2px; height:1em;
+        background:#9a6f3e;
+        margin-left:6px;
+        animation:blink 1s steps(1) infinite;
+        vertical-align:-0.05em
+      }
+      @keyframes blink{50%{opacity:0}}
 
       /* Flip avatar/photo */
       .flip-wrap { perspective: 1200px; }
@@ -63,18 +84,22 @@
       .flip.is-flipped { transform: rotateY(180deg); }
       .flip-face { backface-visibility: hidden; }
       .flip-back { transform: rotateY(180deg); }
+
+      /* Più info - puntini eleganti */
+      .infoList .dot{box-shadow:0 8px 18px -8px rgba(0,0,0,.25)}
     </style>
 
     <script>
+      /* Tema: default dark, rispetta scelta salvata */
       (function() {
         const stored = localStorage.getItem('theme');
         const root = document.documentElement;
-        // Default to dark theme unless user explicitly chose light
         if (stored === 'light') { root.classList.remove('dark'); }
         else { root.classList.add('dark'); }
       })();
     </script>
   </head>
+
   <body class="bg-white text-ink dark:bg-ink dark:text-beige font-sans">
     <!-- SFONDO SFUMATURE -->
     <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
@@ -82,10 +107,10 @@
       <div class="absolute bottom-[-10rem] right-[-10rem] w-[40rem] h-[40rem] rounded-full bg-caramel/20 blur-3xl"></div>
     </div>
 
-    <!-- SPLASH: typewriter semplice con Parfumerie -->
+    <!-- SPLASH: typewriter Parfumerie -->
     <div id="splash" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-sand via-beige to-gold">
       <div class="text-center px-6">
-        <h1 id="splashHello" class="title-script drop-shadow-sm caret" aria-label="Hello"></h1>
+        <h1 id="splashHello" class="title-script caret" aria-label="Hello"></h1>
       </div>
     </div>
 
@@ -97,6 +122,7 @@
           <a class="hover:text-caramel" href="#progetti" data-i18n="nav_projects">Progetti</a>
           <a class="hover:text-caramel" href="#strumenti" data-i18n="nav_tools">Strumenti</a>
           <a class="hover:text-caramel" href="#esperienza" data-i18n="nav_experience">Esperienza</a>
+          <a class="hover:text-caramel" href="#piu-info" data-i18n="nav_more">Più info</a>
           <a class="hover:text-caramel" href="#contatti" data-i18n="nav_contact">Contatti</a>
           <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10" href="#cv" aria-label="Scarica CV"><span data-i18n="nav_cv">CV</span> ↗</a>
         </nav>
@@ -118,6 +144,7 @@
           <a class="hover:text-caramel" href="#progetti" data-i18n="nav_projects">Progetti</a>
           <a class="hover:text-caramel" href="#strumenti" data-i18n="nav_tools">Strumenti</a>
           <a class="hover:text-caramel" href="#esperienza" data-i18n="nav_experience">Esperienza</a>
+          <a class="hover:text-caramel" href="#piu-info" data-i18n="nav_more">Più info</a>
           <a class="hover:text-caramel" href="#contatti" data-i18n="nav_contact">Contatti</a>
           <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-beige/70 hover:bg-caramel/10 w-max" href="#cv"><span data-i18n="nav_cv">CV</span></a>
         </nav>
@@ -131,8 +158,7 @@
           <p class="script-portfolio text-caramel" data-i18n="portfolio">Portfolio</p>
           <h1 class="kicker mt-3"><span data-i18n="hero_intro">Ciao, sono</span> <span class="text-caramel">Noemi</span>.</h1>
           <p class="bodycopy mt-5" data-i18n="hero_desc_it">Ho una passione per il caffè, punti vettoriali e pixel perfetti. Creo marchi e design che ti fanno dire "wow". Ricordando sempre che il design è arte, ma con un obiettivo!</p>
-          
-          
+          <!-- Nessun bottone contatti / social nell'hero per richiesta -->
         </div>
         <div class="relative flip-wrap">
           <div id="flipCard" class="flip rounded-3xl">
@@ -150,7 +176,7 @@
       </div>
     </section>
 
-    <!-- PROGETTI (placeholder) -->
+    <!-- PROGETTI -->
     <section id="progetti" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="flex items-end justify-between gap-4">
@@ -208,7 +234,9 @@
     <section id="piu-info" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <h2 class="script-title" data-i18n="more_title">Più info su di me</h2>
+
         <ul class="infoList mt-8 space-y-6">
+          <!-- Formazione -->
           <li class="p-5 rounded-2xl border border-beige/70 bg-white/70 dark:bg-ink/40">
             <div class="flex items-start gap-4">
               <span class="dot mt-2 w-3 h-3 rounded-full bg-caramel"></span>
@@ -221,6 +249,8 @@
               </div>
             </div>
           </li>
+
+          <!-- Workshop & Certificazioni -->
           <li class="p-5 rounded-2xl border border-beige/70 bg-white/70 dark:bg-ink/40">
             <div class="flex items-start gap-4">
               <span class="dot mt-2 w-3 h-3 rounded-full bg-caramel"></span>
@@ -234,6 +264,8 @@
               </div>
             </div>
           </li>
+
+          <!-- Lingue -->
           <li class="p-5 rounded-2xl border border-beige/70 bg-white/70 dark:bg-ink/40">
             <div class="flex items-start gap-4">
               <span class="dot mt-2 w-3 h-3 rounded-full bg-caramel"></span>
@@ -247,25 +279,29 @@
             </div>
           </li>
         </ul>
+
       </div>
     </section>
 
     <!-- CONTATTI -->
-    <section id="contatti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
+    <section id="contatti" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
           <h2 class="script-title" data-i18n="contact_title">Contatti</h2>
           <p class="bodycopy mt-2 opacity-80" data-i18n="contact_pref">Preferisci scrivermi direttamente?</p>
           <div class="mt-6 flex items-center gap-4">
             <a id="btnEmail" href="mailto:noemialderisi@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition" aria-label="Invia un'email a Noemi">
+              <!-- icona email -->
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 13.065 0 6V4l12 7 12-7v2l-12 7.065ZM0 8l12 7 12-7v12H0V8Z"/></svg>
               <span data-i18n="email_button">Email</span>
             </a>
             <a id="btnLinkedin" href="https://www.linkedin.com/in/noemi-alderisi-7319a0313/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-beige/70 hover:bg-gold/10" aria-label="LinkedIn di Noemi Alderisi">
+              <!-- icona linkedin -->
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V9h3v10zM6.5 7.8c-.96 0-1.7-.78-1.7-1.8s.74-1.8 1.7-1.8c.96 0 1.7.78 1.7 1.8s-.74 1.8-1.7 1.8zM20 19h-3v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95V19h-3V9h2.88v1.36h.04c.4-.76 1.38-1.56 2.85-1.56 3.05 0 3.62 2.01 3.62 4.62V19z"/></svg>
               <span data-i18n="linkedin_button">LinkedIn</span>
             </a>
             <a href="tel:+393458346898" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-beige/70 hover:bg-gold/10" aria-label="Chiama Noemi">
+              <!-- icona telefono -->
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.4 22 2 13.6 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
               <span>Telefono</span>
             </a>
@@ -288,7 +324,9 @@
     <footer class="py-10">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 text-sm flex flex-col sm:flex-row items-center justify-between gap-4">
         <p>© <span id="year"></span> Noemi Alderisi. <span data-i18n="footer_rights">Tutti i diritti riservati.</span></p>
-        
+        <div class="flex items-center gap-4">
+          <!-- Nessun link privacy / impressum come richiesto -->
+        </div>
       </div>
     </footer>
 
@@ -312,7 +350,7 @@
       const menuBtn = document.getElementById('menuBtn'); const mobileMenu = document.getElementById('mobileMenu');
       menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-      // Splash typing — effetto macchina da scrivere (Parfumerie)
+      // Splash typewriter
       const splash = document.getElementById('splash');
       const helloEl = document.getElementById('splashHello');
       const helloTxt = 'Hello';
@@ -337,39 +375,57 @@
       const flipCard = document.getElementById('flipCard'); const flipBtn = document.getElementById('flipBtn');
       function flip(){ flipCard.classList.toggle('is-flipped'); }
       flipBtn.addEventListener('click', flip);
-      // click-to-flip disabilitato: usa solo il bottone
 
       // ===== i18n (IT/EN) =====
       const i18n = {
         it: {
-          nav_projects: 'Progetti', nav_tools: 'Strumenti', nav_experience: 'Esperienza', nav_contact: 'Contatti', nav_cv: 'CV',
+          nav_projects: 'Progetti', nav_tools: 'Strumenti', nav_experience: 'Esperienza', nav_more: 'Più info', nav_contact: 'Contatti', nav_cv: 'CV',
           portfolio: 'Portfolio', hero_intro: 'Ciao, sono',
           hero_desc_it: 'Ho una passione per il caffè, punti vettoriali e pixel perfetti. Creo marchi e design che ti fanno dire "wow". Ricordando sempre che il design è arte, ma con un obiettivo!',
-          cta_contact: 'Contattami', cta_projects: 'Guarda i progetti',
           projects_title: 'Progetti in evidenza', projects_all: 'Tutti i progetti', projects_soon: 'Presto in arrivo: aggiungeremo i tuoi progetti migliori.',
           tools_title: 'Strumenti', tools_desc: 'I software che uso ogni giorno.',
-          experience_title: 'Esperienza', more_title: 'Più info su di me', contact_title: 'Contatti', contact_pref: 'Preferisci scrivermi direttamente?',
-          email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: "Oppure copia l'indirizzo email:", copy: 'Copia', copied: 'Copiato!', footer_rights: 'Tutti i diritti riservati.', splash_enter: 'Entra',
-          aria_email: "Invia un'email a Noemi", aria_linkedin: 'LinkedIn di Noemi Alderisi', aria_theme: 'Cambia tema'
+          experience_title: 'Esperienza', more_title: 'Più info su di me',
+          contact_title: 'Contatti', contact_pref: 'Preferisci scrivermi direttamente?',
+          email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: "Oppure copia l'indirizzo email:", copy: 'Copia', copied: 'Copiato!',
+          footer_rights: 'Tutti i diritti riservati.'
         },
         en: {
-          nav_projects: 'Projects', nav_tools: 'Tools', nav_experience: 'Experience', nav_contact: 'Contact', nav_cv: 'Resume',
+          nav_projects: 'Projects', nav_tools: 'Tools', nav_experience: 'Experience', nav_more: 'More', nav_contact: 'Contact', nav_cv: 'Resume',
           portfolio: 'Portfolio', hero_intro: "Hi, I'm",
-          hero_desc_it: "Hi! I'm Noemi. I love coffee, vector points and pixel perfection. I create brands and designs that make you say 'wow'—always remembering design is art, but with a goal!",
-          cta_contact: 'Contact me', cta_projects: 'See projects',
+          hero_desc_it: "I love coffee, vector points and pixel perfection. I create brands and designs that make you say 'wow'—always remembering design is art, but with a goal!",
           projects_title: 'Featured projects', projects_all: 'All projects', projects_soon: 'Coming soon: we will add your best projects.',
           tools_title: 'Tools', tools_desc: 'The software I use daily.',
-          experience_title: 'Experience', more_title: 'More about me', contact_title: 'Get in touch', contact_pref: 'Prefer to write me directly?',
-          email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: 'Or copy the email address:', copy: 'Copy', copied: 'Copied!', footer_rights: 'All rights reserved.', splash_enter: 'Enter',
-          aria_email: 'Send an email to Noemi', aria_linkedin: 'Noemi Alderisi on LinkedIn', aria_theme: 'Toggle theme'
+          experience_title: 'Experience', more_title: 'More about me',
+          contact_title: 'Contact', contact_pref: 'Prefer to write me directly?',
+          email_button: 'Email', linkedin_button: 'LinkedIn', copy_prompt: 'Or copy the email address:', copy: 'Copy', copied: 'Copied!',
+          footer_rights: 'All rights reserved.'
         }
       };
       const langBtn = document.getElementById('langBtn'); const langMenu = document.getElementById('langMenu');
       function getLang(){ return localStorage.getItem('lang') || 'it'; }
-      function applyLang(lang){ const dict = i18n[lang] || i18n.it; document.documentElement.lang = lang; langBtn.textContent = lang.toUpperCase(); document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[key]) el.textContent = dict[key]; }); const emailHero = document.getElementById('lnkEmailHero'); const linkedinHero = document.getElementById('lnkLinkedinHero'); const btnEmail = document.getElementById('btnEmail'); const btnLinkedin = document.getElementById('btnLinkedin'); const themeToggle = document.getElementById('themeToggle'); if (emailHero) emailHero.setAttribute('aria-label', dict.aria_email); if (linkedinHero) linkedinHero.setAttribute('aria-label', dict.aria_linkedin); if (btnEmail) btnEmail.setAttribute('aria-label', dict.aria_email); if (btnLinkedin) btnLinkedin.setAttribute('aria-label', dict.aria_linkedin); if (themeToggle) themeToggle.setAttribute('aria-label', dict.aria_theme); }
+      function applyLang(lang){
+        const dict = i18n[lang] || i18n.it;
+        document.documentElement.lang = lang;
+        langBtn.textContent = lang.toUpperCase();
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) el.textContent = dict[key];
+        });
+        // aria labels
+        const btnEmail = document.getElementById('btnEmail');
+        const btnLinkedin = document.getElementById('btnLinkedin');
+        if (btnEmail) btnEmail.setAttribute('aria-label', lang==='it' ? "Invia un'email a Noemi" : 'Send an email to Noemi');
+        if (btnLinkedin) btnLinkedin.setAttribute('aria-label', lang==='it' ? 'LinkedIn di Noemi Alderisi' : 'Noemi Alderisi on LinkedIn');
+      }
       function setLang(lang){ localStorage.setItem('lang', lang); applyLang(lang); }
-      langBtn.addEventListener('click', () => { const open = !langMenu.classList.contains('hidden'); langMenu.classList.toggle('hidden'); langBtn.setAttribute('aria-expanded', String(!open)); });
-      langMenu.addEventListener('click', (e) => { const target = e.target.closest('[data-set-lang]'); if (!target) return; const lang = target.getAttribute('data-set-lang'); setLang(lang); langMenu.classList.add('hidden'); });
+      langBtn.addEventListener('click', () => {
+        const open = !langMenu.classList.contains('hidden');
+        langMenu.classList.toggle('hidden'); langBtn.setAttribute('aria-expanded', String(!open));
+      });
+      langMenu.addEventListener('click', (e) => {
+        const target = e.target.closest('[data-set-lang]'); if (!target) return;
+        const lang = target.getAttribute('data-set-lang'); setLang(lang); langMenu.classList.add('hidden');
+      });
       document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) langMenu.classList.add('hidden'); });
       applyLang(getLang());
     </script>
