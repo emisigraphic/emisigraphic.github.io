@@ -34,12 +34,12 @@
       @keyframes helloDraw{to{stroke-dashoffset:0}}
       @keyframes helloFill{to{opacity:1}}
           /* Typewriter splash (Parfumerie) */
-      #splashHello.caret::after{content:'';display:inline-block;width:2px;height:1em;background:#ab783e;margin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05em}
+      #splashHello.caret::after{content:'';display:inline-block;width:2px;height:1em;background:#9a6f3e;margin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05emmargin-left:6px;animation:blink 1s steps(1) infinite;vertical-align:-0.05em}
       @keyframes blink{50%{opacity:0}}
           /* Colore scritta Hello (caramel) */
-      #splashHello{color:#ab783e;-webkit-text-stroke:0.5px rgba(255,255,255,.35);text-shadow:0 2px 10px rgba(0,0,0,.08),0 0 1px rgba(255,255,255,.25)}
+      #splashHello{color:#9a6f3e;-webkit-text-stroke:0.5px rgba(255,255,255,.35);text-shadow:0 2px 10px rgba(0,0,0,.08),0 0 1px rgba(255,255,255,.25)}
           /* Colore e leggibilità scritta Hello (marrone/beige) */
-      #splashHello{color:#ab783e !important;-webkit-text-stroke:0.5px rgba(255,255,255,.35);text-shadow:0 2px 10px rgba(0,0,0,.08),0 0 1px rgba(255,255,255,.25)}
+      #splashHello{color:#9a6f3e !important;-webkit-text-stroke:0.5px rgba(255,255,255,.35);text-shadow:0 2px 10px rgba(0,0,0,.08),0 0 1px rgba(255,255,255,.25)}
 
       /* Lista professionale per "Più info su di me" */
       .infoList .dot{box-shadow:0 8px 18px -8px rgba(0,0,0,.25)}
@@ -90,7 +90,7 @@
       /* Splash visibility & styling */
       #splash { transition: opacity .7s ease, visibility .7s ease; }
       #splash.hidden { opacity: 0; visibility: hidden; }
-      #splashHello { color: #221505; -webkit-text-stroke: 1px rgba(255,255,255,0.45); text-shadow: 0 2px 10px rgba(0,0,0,.08), 0 0 1px rgba(255,255,255,.35); }
+      #splashHello { color: #9a6f3e; -webkit-text-stroke: 1px rgba(255,255,255,0.45); text-shadow: 0 2px 10px rgba(0,0,0,.08), 0 0 1px rgba(255,255,255,.35); }
 
       /* Flip avatar/photo */
       .flip-wrap { perspective: 1200px; }
@@ -214,14 +214,82 @@
       </div>
     </section>
 
-    <!-- ESPERIENZA + FORMAZIONE -->
-    $1$3
+    <!-- ESPERIENZA -->
+    <section id="esperienza" class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="script-title" data-i18n="experience_title">Esperienza</h2>
+        <ol class="relative mt-8">
+          <li class="mb-10 ms-6">
+            <span class="absolute -start-3 flex items-center justify-center w-6 h-6 bg-caramel rounded-full ring-8 ring-white dark:ring-ink"></span>
+            <div class="p-5 rounded-2xl border border-beige/70">
+              <h3 class="font-bold text-[20pt]">Graphic Designer – Freelance</h3>
+              <p class="text-[16pt] opacity-80">Set. 2022 — Presente · Remoto</p>
+              <p class="mt-2 text-[16pt] opacity-90">Branding, grafica per la stampa e digital, sviluppo file esecutivi e identità visive.</p>
+            </div>
+          </li>
+          <li class="mb-10 ms-6">
+            <span class="absolute -start-3 flex items-center justify-center w-6 h-6 bg-caramel rounded-full ring-8 ring-white dark:ring-ink"></span>
+            <div class="p-5 rounded-2xl border border-beige/70">
+              <h3 class="font-bold text-[20pt]">Social Media Manager – LSP Media</h3>
+              <p class="text-[16pt] opacity-80">Lug. 2025 — Presente · Remoto</p>
+              <p class="mt-2 text-[16pt] opacity-90">Pianificazione contenuti, visual per social, ottimizzazione brand touchpoints.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PIÙ INFO SU DI ME -->
+    <section id="piu-info" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="script-title" data-i18n="more_title">Più info su di me</h2>
+        <ul class="infoList mt-8 space-y-6">
+          <li class="p-5 rounded-2xl border border-beige/70 bg-white/70 dark:bg-ink/40">
+            <div class="flex items-start gap-4">
+              <span class="dot mt-2 w-3 h-3 rounded-full bg-caramel"></span>
+              <div class="flex-1">
+                <h3 class="font-bold text-[20pt]">Formazione</h3>
+                <ul class="mt-3 list-disc pl-6 text-[16pt]">
+                  <li><strong>Accademia di Belle Arti, Catania</strong> — Visual Communication Design (2021–Presente)</li>
+                  <li><strong>Liceo Artistico “M.M. Lazzaro”, Catania</strong> — Grafica Pubblicitaria (2015–2020)</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="p-5 rounded-2xl border border-beige/70 bg-white/70 dark:bg-ink/40">
+            <div class="flex items-start gap-4">
+              <span class="dot mt-2 w-3 h-3 rounded-full bg-caramel"></span>
+              <div class="flex-1">
+                <h3 class="font-bold text-[20pt]">Workshop &amp; Certificazioni</h3>
+                <ul class="mt-3 list-disc pl-6 text-[16pt]">
+                  <li>Workshop con <strong>Aeroporto di Catania</strong>: pannelli di awareness su oggetti “pericolosi” ai raggi X (illusioni visive).</li>
+                  <li>Workshop con <strong>Comune di Catania</strong> e scuole: tutoraggio annuale, mostra itinerante finale (3 giorni).</li>
+                  <li>Corso Sicurezza sul Lavoro — completato 2024.</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="p-5 rounded-2xl border border-beige/70 bg-white/70 dark:bg-ink/40">
+            <div class="flex items-start gap-4">
+              <span class="dot mt-2 w-3 h-3 rounded-full bg-caramel"></span>
+              <div class="flex-1">
+                <h3 class="font-bold text-[20pt]">Lingue</h3>
+                <ul class="mt-3 list-disc pl-6 text-[16pt]">
+                  <li>Italiano (madrelingua)</li>
+                  <li>Inglese (intermedio)</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
     <!-- CONTATTI -->
     <section id="contatti" class="py-16 md:py-24 bg-sand/40 dark:bg-cocoa/30">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          Contatti
+          <h2 class="script-title" data-i18n="contact_title">Contatti</h2>
           <p class="bodycopy mt-2 opacity-80" data-i18n="contact_pref">Preferisci scrivermi direttamente?</p>
           <div class="mt-6 flex items-center gap-4">
             <a id="btnEmail" href="mailto:noemialderisi@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-caramel text-white shadow-soft hover:-translate-y-[1px] transition" aria-label="Invia un'email a Noemi">
