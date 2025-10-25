@@ -163,6 +163,14 @@
               <span class="mt-4 px-3 py-1 rounded-xl border border-gold bg-white/30 text-gold font-bold">Clicca per vedere</span>
             </div>
           </div>
+          <div class="relative group cursor-pointer rounded-2xl border border-beige/70 overflow-hidden shadow-soft hover:shadow-lg transition" onclick="openBottegaGallery()">
+            <img src="images/bottega_intro.png" alt="Anteprima Bottega Project" class="w-full h-52 object-cover group-hover:brightness-75 transition"/>
+            <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 bg-ink/70 text-white transition">
+              <h3 class="text-2xl font-bold mb-2">Bottega Project</h3>
+              <p class="text-lg">Visual identity & branding</p>
+              <span class="mt-4 px-3 py-1 rounded-xl border border-gold bg-white/30 text-gold font-bold">Clicca per vedere</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -178,12 +186,33 @@
           </div>
         </div>
         <div class="mt-4 flex justify-between w-full max-w-4xl px-6">
-          <button aria-label="Slide precedente" class="text-caramel hover:text-gold text-4xl select-none" onclick="prevSlide()">‹</button>
-          <button aria-label="Slide successivo" class="text-caramel hover:text-gold text-4xl select-none" onclick="nextSlide()">›</button>
+          <button aria-label="Slide precedente" class="text-caramel hover:text-gold text-4xl select-none" onclick="prevSlideGlamour()">‹</button>
+          <button aria-label="Slide successivo" class="text-caramel hover:text-gold text-4xl select-none" onclick="nextSlideGlamour()">›</button>
         </div>
         <div class="text-center mt-6 px-6">
           <h3 class="font-bold text-2xl text-caramel mb-2">Glamour – Sole e Bellezza</h3>
           <p class="text-lg">Concept social e identità visiva per un beauty brand luminoso, elegante e inclusivo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODALE GALLERY BOTTEGA CON CAROUSEL -->
+    <div id="bottegaGalleryModal" class="fixed inset-0 z-[200] flex items-center justify-center bg-ink/80 bg-opacity-90 hidden p-6">
+      <div class="relative bg-white dark:bg-ink rounded-3xl p-6 max-w-6xl w-full shadow-2xl flex flex-col items-center">
+        <button onclick="closeBottegaGallery()" class="absolute top-4 right-4 text-3xl text-caramel hover:text-ink dark:hover:text-white" aria-label="Chiudi">×</button>
+        <div class="w-full relative overflow-hidden rounded-2xl" style="height:600px;">
+          <div id="bottegaCarousel" class="flex transition-transform duration-500 h-full">
+            <img src="images/bottega_1.png" alt="Bottega Slide 1" class="w-full h-full object-contain flex-shrink-0 rounded-2xl"/>
+            <img src="images/bottega_2.png" alt="Bottega Slide 2" class="w-full h-full object-contain flex-shrink-0 rounded-2xl"/>
+          </div>
+        </div>
+        <div class="mt-4 flex justify-between w-full max-w-4xl px-6">
+          <button aria-label="Slide precedente" class="text-caramel hover:text-gold text-4xl select-none" onclick="prevSlideBottega()">‹</button>
+          <button aria-label="Slide successivo" class="text-caramel hover:text-gold text-4xl select-none" onclick="nextSlideBottega()">›</button>
+        </div>
+        <div class="text-center mt-6 px-6">
+          <h3 class="font-bold text-2xl text-caramel mb-2">Bottega Project</h3>
+          <p class="text-lg">Visual identity e branding per un progetto artigianale autentico e ricercato.</p>
         </div>
       </div>
     </div>
@@ -240,7 +269,7 @@
                 <h3 class="font-bold text-[20pt]">Formazione</h3>
                 <ul class="mt-3 list-disc pl-6 text-[16pt]">
                   <li><strong>Accademia di Belle Arti, Catania</strong> — Visual Communication Design (2021–Presente)</li>
-                  <li><strong>Liceo Artistico “M.M. Lazzaro”, Catania</strong> — Grafica Pubblicitaria (2015–2020)</li>
+                  <li><strong>Liceo Artistico "M.M. Lazzaro", Catania</strong> — Grafica Pubblicitaria (2015–2020)</li>
                 </ul>
               </div>
             </div>
@@ -251,7 +280,7 @@
               <div class="flex-1">
                 <h3 class="font-bold text-[20pt]">Workshop &amp; Certificazioni</h3>
                 <ul class="mt-3 list-disc pl-6 text-[16pt]">
-                  <li>Workshop con <strong>Aeroporto di Catania</strong>: pannelli di awareness su oggetti “pericolosi” ai raggi X (illusioni visive).</li>
+                  <li>Workshop con <strong>Aeroporto di Catania</strong>: pannelli di awareness su oggetti "pericolosi" ai raggi X (illusioni visive).</li>
                   <li>Workshop con <strong>Comune di Catania</strong> e scuole: tutoraggio annuale, mostra itinerante finale (3 giorni).</li>
                   <li>Corso Sicurezza sul Lavoro — completato 2024.</li>
                 </ul>
@@ -298,7 +327,7 @@
           <div class="rounded-2xl p-10 bg-white/70 dark:bg-ink/60">
             <p class="text-[16pt] opacity-80" data-i18n="copy_prompt">Oppure copia l'indirizzo email:</p>
             <div class="mt-2 flex items-center gap-3">
-              ode class="px-3 py-1.5 rounded-lg bg-sand/60 border border-beige/70 selectct-all">noemialderisi@gmail.com</code>
+              <code class="px-3 py-1.5 rounded-lg bg-sand/60 border border-beige/70 select-all">noemialderisi@gmail.com</code>
               <button id="copyMail" class="px-3 py-1.5 rounded-lg border border-beige/70 hover:bg-gold/10 text-sm" data-i18n="copy">Copia</button>
             </div>
             <p id="copyMsg" class="mt-2 text-xs text-ink/60 dark:text-beige/70 hidden" data-i18n="copied">Copiato!</p>
@@ -315,37 +344,80 @@
     </footer>
 
     <script>
-      let currentSlide = 0;
-      function updateCarousel() {
+      let currentSlideGlamour = 0;
+      let currentSlideBottega = 0;
+
+      function updateCarouselGlamour() {
         const carousel = document.getElementById("glamourCarousel");
-        carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        carousel.style.transform = `translateX(-${currentSlideGlamour * 100}%)`;
       }
-      function prevSlide() {
-        if (currentSlide > 0) {
-          currentSlide--;
-          updateCarousel();
+      
+      function prevSlideGlamour() {
+        if (currentSlideGlamour > 0) {
+          currentSlideGlamour--;
+          updateCarouselGlamour();
         }
       }
-      function nextSlide() {
+      
+      function nextSlideGlamour() {
         const slides = document.querySelectorAll("#glamourCarousel img");
-        if (currentSlide < slides.length - 1) {
-          currentSlide++;
-          updateCarousel();
+        if (currentSlideGlamour < slides.length - 1) {
+          currentSlideGlamour++;
+          updateCarouselGlamour();
         }
       }
+      
       function openGlamourGallery() {
         document.getElementById('glamourGalleryModal').classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
-        currentSlide = 0;
-        updateCarousel();
+        currentSlideGlamour = 0;
+        updateCarouselGlamour();
       }
+      
       function closeGlamourGallery() {
         document.getElementById('glamourGalleryModal').classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
       }
+
+      function updateCarouselBottega() {
+        const carousel = document.getElementById("bottegaCarousel");
+        carousel.style.transform = `translateX(-${currentSlideBottega * 100}%)`;
+      }
+      
+      function prevSlideBottega() {
+        if (currentSlideBottega > 0) {
+          currentSlideBottega--;
+          updateCarouselBottega();
+        }
+      }
+      
+      function nextSlideBottega() {
+        const slides = document.querySelectorAll("#bottegaCarousel img");
+        if (currentSlideBottega < slides.length - 1) {
+          currentSlideBottega++;
+          updateCarouselBottega();
+        }
+      }
+      
+      function openBottegaGallery() {
+        document.getElementById('bottegaGalleryModal').classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+        currentSlideBottega = 0;
+        updateCarouselBottega();
+      }
+      
+      function closeBottegaGallery() {
+        document.getElementById('bottegaGalleryModal').classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+
       window.addEventListener('keydown', function(e){
-        if(e.key === 'Escape') closeGlamourGallery();
+        if(e.key === 'Escape') {
+          closeGlamourGallery();
+          closeBottegaGallery();
+        }
       });
+
       (function(){ const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear(); })();
       const themeToggle = document.getElementById('themeToggle');
       const themeIcon = document.getElementById('themeIcon');
